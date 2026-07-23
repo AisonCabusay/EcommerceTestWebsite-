@@ -1,0 +1,7208 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>
+        ShopSphere | TikTok Pixel Test Store
+    </title>
+
+
+    <!-- =====================================================
+         EXTERNAL CSS
+    ====================================================== -->
+
+    <link
+        rel="stylesheet"
+        href="css.css"
+    >
+
+
+    <!-- =====================================================
+         GOOGLE FONT
+    ====================================================== -->
+
+    <link
+        rel="preconnect"
+        href="https://fonts.googleapis.com"
+    >
+
+    <link
+        rel="preconnect"
+        href="https://fonts.gstatic.com"
+        crossorigin
+    >
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet"
+    >
+
+</head>
+
+
+<body>
+
+
+<!-- =========================================================
+     ANNOUNCEMENT
+========================================================= -->
+
+<div class="announcement">
+
+    TikTok Pixel Test Store
+    •
+    Developer Testing Environment
+
+</div>
+
+
+<!-- =========================================================
+     HEADER
+========================================================= -->
+
+<header class="header">
+
+    <div class="container header-inner">
+
+
+        <a
+            href="#"
+            class="logo"
+            onclick="goHome()"
+        >
+
+            Shop
+            <span>
+                Sphere
+            </span>
+
+        </a>
+
+
+        <!-- SEARCH -->
+
+        <div class="search-container">
+
+            <input
+                type="search"
+                id="searchInput"
+                placeholder="Search products..."
+            >
+
+            <button
+                onclick="searchProducts()"
+            >
+                🔍
+            </button>
+
+        </div>
+
+
+        <!-- HEADER ACTIONS -->
+
+        <div class="header-actions">
+
+
+            <!-- CURRENCY -->
+
+            <button
+                class="currency-selector"
+                onclick="openCurrencyModal()"
+            >
+
+                <span id="currencyFlag">
+                    🇺🇸
+                </span>
+
+                <span id="currencyCode">
+                    USD
+                </span>
+
+            </button>
+
+
+            <!-- WISHLIST -->
+
+            <button
+                class="header-icon"
+                onclick="openWishlist()"
+            >
+
+                ♡
+
+                <span
+                    id="wishlistCount"
+                    class="badge"
+                >
+                    0
+                </span>
+
+            </button>
+
+
+            <!-- ACCOUNT -->
+
+            <button
+                class="header-icon"
+                onclick="openAccount()"
+            >
+
+                👤
+
+            </button>
+
+
+            <!-- DEVELOPER -->
+
+            <button
+                class="developer-button"
+                onclick="openDeveloperPanel()"
+            >
+
+                🛠 Developer
+
+            </button>
+
+
+            <!-- CART -->
+
+            <button
+                class="cart-button"
+                onclick="openCart()"
+            >
+
+                🛒 Cart
+
+                <span
+                    id="cartCount"
+                    class="cart-count"
+                >
+                    0
+                </span>
+
+            </button>
+
+
+        </div>
+
+    </div>
+
+</header>
+
+
+<!-- =========================================================
+     NAVIGATION
+========================================================= -->
+
+<nav class="navigation">
+
+    <div class="container nav-inner">
+
+
+        <button
+            onclick="filterCategory('all')"
+        >
+            All Products
+        </button>
+
+
+        <button
+            onclick="filterCategory('electronics')"
+        >
+            Electronics
+        </button>
+
+
+        <button
+            onclick="filterCategory('fashion')"
+        >
+            Fashion
+        </button>
+
+
+        <button
+            onclick="filterCategory('home')"
+        >
+            Home
+        </button>
+
+
+        <button
+            onclick="filterCategory('beauty')"
+        >
+            Beauty
+        </button>
+
+
+        <button
+            onclick="filterCategory('sports')"
+        >
+            Sports
+        </button>
+
+
+    </div>
+
+</nav>
+
+
+<!-- =========================================================
+     HERO
+========================================================= -->
+
+<section class="hero">
+
+    <div class="container hero-content">
+
+
+        <div>
+
+
+            <span class="hero-label">
+
+                TIKTOK PIXEL TEST STORE
+
+            </span>
+
+
+            <h1>
+
+                Test Ecommerce
+                Events
+                With Real Actions.
+
+            </h1>
+
+
+            <p>
+
+                Use this ecommerce website to test
+                TikTok Pixel events, parameters,
+                currencies, product data and
+                checkout events.
+
+            </p>
+
+
+            <button
+                class="primary-button"
+                onclick="scrollToProducts()"
+            >
+
+                Shop Now
+
+            </button>
+
+
+        </div>
+
+
+        <div class="hero-card">
+
+
+            <div class="hero-card-icon">
+
+                🧪
+
+            </div>
+
+
+            <h3>
+
+                Pixel Test Lab
+
+            </h3>
+
+
+            <p>
+
+                Configure your TikTok Pixel,
+                select event parameters and
+                monitor events sent from this
+                website.
+
+            </p>
+
+
+            <button
+                class="primary-button full-width"
+                onclick="openDeveloperPanel()"
+            >
+
+                Open Developer Settings
+
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     MAIN CONTENT
+========================================================= -->
+
+<main
+    class="container main-content"
+    id="productsSection"
+>
+
+
+    <div class="section-header">
+
+
+        <div>
+
+
+            <span class="section-label">
+
+                OUR STORE
+
+            </span>
+
+
+            <h2>
+
+                Featured Products
+
+            </h2>
+
+
+        </div>
+
+
+        <select
+            id="sortSelect"
+            onchange="sortProducts()"
+        >
+
+            <option value="default">
+
+                Sort by
+
+            </option>
+
+
+            <option value="price-low">
+
+                Price: Low to High
+
+            </option>
+
+
+            <option value="price-high">
+
+                Price: High to Low
+
+            </option>
+
+
+            <option value="name">
+
+                Name
+
+            </option>
+
+        </select>
+
+
+    </div>
+
+
+    <!-- FILTERS -->
+
+    <div class="filter-bar">
+
+
+        <button
+            class="filter-button active"
+            onclick="filterCategory('all', this)"
+        >
+
+            All
+
+        </button>
+
+
+        <button
+            class="filter-button"
+            onclick="filterCategory('electronics', this)"
+        >
+
+            Electronics
+
+        </button>
+
+
+        <button
+            class="filter-button"
+            onclick="filterCategory('fashion', this)"
+        >
+
+            Fashion
+
+        </button>
+
+
+        <button
+            class="filter-button"
+            onclick="filterCategory('home', this)"
+        >
+
+            Home
+
+        </button>
+
+
+        <button
+            class="filter-button"
+            onclick="filterCategory('beauty', this)"
+        >
+
+            Beauty
+
+        </button>
+
+
+        <button
+            class="filter-button"
+            onclick="filterCategory('sports', this)"
+        >
+
+            Sports
+
+        </button>
+
+
+    </div>
+
+
+    <!-- PRODUCTS -->
+
+    <div
+        id="productGrid"
+        class="product-grid"
+    >
+    </div>
+
+
+</main>
+
+
+<!-- =========================================================
+     FEATURES
+========================================================= -->
+
+<section class="features">
+
+    <div class="container features-grid">
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                🚚
+            </div>
+
+            <div>
+
+                <h3>
+                    Free Shipping
+                </h3>
+
+                <p>
+                    Free shipping on qualifying orders.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                🔒
+            </div>
+
+            <div>
+
+                <h3>
+                    Secure Payment
+                </h3>
+
+                <p>
+                    Your payment information is protected.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                ↩️
+            </div>
+
+            <div>
+
+                <h3>
+                    Easy Returns
+                </h3>
+
+                <p>
+                    Simple and hassle-free returns.
+                </p>
+
+            </div>
+
+        </div>
+
+
+        <div class="feature">
+
+            <div class="feature-icon">
+                🧪
+            </div>
+
+            <div>
+
+                <h3>
+                    Pixel Testing
+                </h3>
+
+                <p>
+                    Test ecommerce tracking events.
+                </p>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+</section>
+
+
+<!-- =========================================================
+     FOOTER
+========================================================= -->
+
+<footer class="footer">
+
+
+    <div class="container footer-grid">
+
+
+        <div>
+
+
+            <div class="footer-logo">
+
+                ShopSphere
+
+            </div>
+
+
+            <p>
+
+                Ecommerce testing environment
+                for TikTok Pixel implementation
+                and event validation.
+
+            </p>
+
+
+        </div>
+
+
+        <div>
+
+
+            <h4>
+                Shop
+            </h4>
+
+
+            <a href="#">
+
+                All Products
+
+            </a>
+
+
+            <a href="#">
+
+                New Arrivals
+
+            </a>
+
+
+            <a href="#">
+
+                Best Sellers
+
+            </a>
+
+
+        </div>
+
+
+        <div>
+
+
+            <h4>
+                Developer
+            </h4>
+
+
+            <button
+                class="footer-debug-button"
+                onclick="openDeveloperPanel()"
+            >
+
+                Pixel Developer Settings
+
+            </button>
+
+
+        </div>
+
+
+        <div>
+
+
+            <h4>
+                Debug
+            </h4>
+
+
+            <button
+                class="footer-debug-button"
+                onclick="openEventConsole()"
+            >
+
+                Event Console
+
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        © 2026 ShopSphere.
+        TikTok Pixel Ecommerce Test Store.
+
+    </div>
+
+
+</footer>
+
+
+<!-- =========================================================
+     CART OVERLAY
+========================================================= -->
+
+<div
+    id="cartOverlay"
+    class="overlay"
+    onclick="closeCart()"
+>
+</div>
+
+
+<!-- =========================================================
+     CART DRAWER
+========================================================= -->
+
+<aside
+    id="cartDrawer"
+    class="side-drawer"
+>
+
+
+    <div class="drawer-header">
+
+
+        <h2>
+
+            Your Cart
+
+        </h2>
+
+
+        <button
+            onclick="closeCart()"
+        >
+
+            ×
+
+        </button>
+
+
+    </div>
+
+
+    <div
+        id="cartItems"
+        class="cart-items"
+    >
+    </div>
+
+
+    <div class="cart-footer">
+
+
+        <div class="coupon-container">
+
+
+            <input
+                type="text"
+                id="couponInput"
+                placeholder="Coupon code"
+            >
+
+
+            <button
+                onclick="applyCoupon()"
+            >
+
+                Apply
+
+            </button>
+
+
+        </div>
+
+
+        <div class="summary-row">
+
+            <span>
+                Subtotal
+            </span>
+
+            <strong id="cartSubtotal">
+                $0.00
+            </strong>
+
+        </div>
+
+
+        <div class="summary-row">
+
+            <span>
+                Discount
+            </span>
+
+            <strong id="cartDiscount">
+                $0.00
+            </strong>
+
+        </div>
+
+
+        <div class="summary-row">
+
+            <span>
+                Shipping
+            </span>
+
+            <strong id="cartShipping">
+                $0.00
+            </strong>
+
+        </div>
+
+
+        <div class="summary-row total-row">
+
+            <span>
+                Total
+            </span>
+
+            <strong id="cartTotal">
+                $0.00
+            </strong>
+
+        </div>
+
+
+        <button
+            class="primary-button full-width"
+            onclick="startCheckout()"
+        >
+
+            Proceed to Checkout
+
+        </button>
+
+
+    </div>
+
+
+</aside>
+
+
+<!-- =========================================================
+     PRODUCT MODAL
+========================================================= -->
+
+<div
+    id="productModal"
+    class="modal-container"
+>
+
+
+    <div class="modal product-modal">
+
+
+        <button
+            class="modal-close"
+            onclick="closeModal('productModal')"
+        >
+
+            ×
+
+        </button>
+
+
+        <div
+            id="productModalContent"
+        >
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+<!-- =========================================================
+     CHECKOUT MODAL
+========================================================= -->
+
+<div
+    id="checkoutModal"
+    class="modal-container"
+>
+
+
+    <div class="modal checkout-modal">
+
+
+        <button
+            class="modal-close"
+            onclick="closeModal('checkoutModal')"
+        >
+
+            ×
+
+        </button>
+
+
+        <div class="checkout-header">
+
+
+            <h2>
+
+                Checkout
+
+            </h2>
+
+
+            <div class="checkout-steps">
+
+                <span class="active">
+
+                    1. Information
+
+                </span>
+
+
+                <span>
+
+                    2. Payment
+
+                </span>
+
+
+                <span>
+
+                    3. Complete
+
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+        <form
+            id="checkoutForm"
+            onsubmit="submitOrder(event)"
+        >
+
+
+            <div class="checkout-grid">
+
+
+                <div>
+
+
+                    <h3>
+
+                        Customer Information
+
+                    </h3>
+
+
+                    <div class="form-group">
+
+
+                        <label>
+                            Email
+                        </label>
+
+
+                        <input
+                            type="email"
+                            id="checkoutEmail"
+                            required
+                            placeholder="customer@example.com"
+                        >
+
+
+                    </div>
+
+
+                    <div class="form-row">
+
+
+                        <div class="form-group">
+
+
+                            <label>
+                                First Name
+                            </label>
+
+
+                            <input
+                                type="text"
+                                id="firstName"
+                                required
+                            >
+
+
+                        </div>
+
+
+                        <div class="form-group">
+
+
+                            <label>
+                                Last Name
+                            </label>
+
+
+                            <input
+                                type="text"
+                                id="lastName"
+                                required
+                            >
+
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="form-group">
+
+
+                        <label>
+                            Address
+                        </label>
+
+
+                        <input
+                            type="text"
+                            id="address"
+                            required
+                        >
+
+
+                    </div>
+
+
+                    <div class="form-row">
+
+
+                        <div class="form-group">
+
+
+                            <label>
+                                City
+                            </label>
+
+
+                            <input
+                                type="text"
+                                id="city"
+                                required
+                            >
+
+
+                        </div>
+
+
+                        <div class="form-group">
+
+
+                            <label>
+                                Postal Code
+                            </label>
+
+
+                            <input
+                                type="text"
+                                id="postalCode"
+                                required
+                            >
+
+
+                        </div>
+
+
+                    </div>
+
+
+                    <div class="form-group">
+
+
+                        <label>
+                            Country
+                        </label>
+
+
+                        <select id="country">
+
+
+                            <option>
+                                Philippines
+                            </option>
+
+
+                            <option>
+                                United States
+                            </option>
+
+
+                            <option>
+                                Japan
+                            </option>
+
+
+                            <option>
+                                Singapore
+                            </option>
+
+
+                            <option>
+                                United Kingdom
+                            </option>
+
+
+                        </select>
+
+
+                    </div>
+
+
+                    <h3>
+
+                        Payment Method
+
+                    </h3>
+
+
+                    <div class="payment-options">
+
+
+                        <label class="payment-option">
+
+
+                            <input
+                                type="radio"
+                                name="payment"
+                                value="credit_card"
+                                checked
+                            >
+
+
+                            💳 Credit / Debit Card
+
+
+                        </label>
+
+
+                        <label class="payment-option">
+
+
+                            <input
+                                type="radio"
+                                name="payment"
+                                value="paypal"
+                            >
+
+
+                            🅿️ PayPal
+
+
+                        </label>
+
+
+                        <label class="payment-option">
+
+
+                            <input
+                                type="radio"
+                                name="payment"
+                                value="cod"
+                            >
+
+
+                            💵 Cash on Delivery
+
+
+                        </label>
+
+
+                    </div>
+
+
+                    <div id="cardFields">
+
+
+                        <div class="form-group">
+
+
+                            <label>
+                                Card Number
+                            </label>
+
+
+                            <input
+                                type="text"
+                                placeholder="4111 1111 1111 1111"
+                            >
+
+
+                        </div>
+
+
+                        <div class="form-row">
+
+
+                            <div class="form-group">
+
+
+                                <label>
+                                    Expiry
+                                </label>
+
+
+                                <input
+                                    type="text"
+                                    placeholder="12/30"
+                                >
+
+
+                            </div>
+
+
+                            <div class="form-group">
+
+
+                                <label>
+                                    CVV
+                                </label>
+
+
+                                <input
+                                    type="text"
+                                    placeholder="123"
+                                >
+
+
+                            </div>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                    <button
+                        type="submit"
+                        class="primary-button full-width"
+                    >
+
+                        Complete Order
+
+                    </button>
+
+
+                </div>
+
+
+                <div class="checkout-summary">
+
+
+                    <h3>
+
+                        Order Summary
+
+                    </h3>
+
+
+                    <div
+                        id="checkoutItems"
+                    >
+                    </div>
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            Subtotal
+                        </span>
+
+                        <strong
+                            id="checkoutSubtotal"
+                        >
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            Discount
+                        </span>
+
+                        <strong
+                            id="checkoutDiscount"
+                        >
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-row">
+
+                        <span>
+                            Shipping
+                        </span>
+
+                        <strong
+                            id="checkoutShipping"
+                        >
+                        </strong>
+
+                    </div>
+
+
+                    <div class="summary-row total-row">
+
+                        <span>
+                            Total
+                        </span>
+
+                        <strong
+                            id="checkoutTotal"
+                        >
+                        </strong>
+
+                    </div>
+
+
+                </div>
+
+
+            </div>
+
+
+        </form>
+
+
+    </div>
+
+
+</div>
+
+
+<!-- =========================================================
+     CURRENCY MODAL
+========================================================= -->
+
+<div
+    id="currencyModal"
+    class="modal-container"
+>
+
+
+    <div class="modal small-modal">
+
+
+        <button
+            class="modal-close"
+            onclick="closeModal('currencyModal')"
+        >
+
+            ×
+
+        </button>
+
+
+        <h2>
+
+            Select Currency
+
+        </h2>
+
+
+        <p>
+
+            The selected currency will be sent
+            as the TikTok Pixel currency parameter.
+
+        </p>
+
+
+        <div class="currency-list">
+
+
+            <button
+                onclick="changeCurrency('USD')"
+            >
+
+                🇺🇸
+                US Dollar
+                (USD)
+
+            </button>
+
+
+            <button
+                onclick="changeCurrency('PHP')"
+            >
+
+                🇵🇭
+                Philippine Peso
+                (PHP)
+
+            </button>
+
+
+            <button
+                onclick="changeCurrency('JPY')"
+            >
+
+                🇯🇵
+                Japanese Yen
+                (JPY)
+
+            </button>
+
+
+            <button
+                onclick="changeCurrency('EUR')"
+            >
+
+                🇪🇺
+                Euro
+                (EUR)
+
+            </button>
+
+
+            <button
+                onclick="changeCurrency('GBP')"
+            >
+
+                🇬🇧
+                British Pound
+                (GBP)
+
+            </button>
+
+
+            <button
+                onclick="changeCurrency('SGD')"
+            >
+
+                🇸🇬
+                Singapore Dollar
+                (SGD)
+
+            </button>
+
+
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+<!-- =========================================================
+     ACCOUNT MODAL
+========================================================= -->
+
+<div
+    id="accountModal"
+    class="modal-container"
+>
+
+
+    <div class="modal small-modal">
+
+
+        <button
+            class="modal-close"
+            onclick="closeModal('accountModal')"
+        >
+
+            ×
+
+        </button>
+
+
+        <h2>
+
+            My Account
+
+        </h2>
+
+
+        <div class="form-group">
+
+
+            <label>
+                Email
+            </label>
+
+
+            <input
+                type="email"
+                placeholder="you@example.com"
+            >
+
+
+        </div>
+
+
+        <div class="form-group">
+
+
+            <label>
+                Password
+            </label>
+
+
+            <input
+                type="password"
+                placeholder="Password"
+            >
+
+
+        </div>
+
+
+        <button
+            class="primary-button full-width"
+            onclick="loginUser()"
+        >
+
+            Sign In
+
+        </button>
+
+
+    </div>
+
+
+</div>
+
+
+<!-- =========================================================
+     WISHLIST MODAL
+========================================================= -->
+
+<div
+    id="wishlistModal"
+    class="modal-container"
+>
+
+
+    <div class="modal">
+
+
+        <button
+            class="modal-close"
+            onclick="closeModal('wishlistModal')"
+        >
+
+            ×
+
+        </button>
+
+
+        <h2>
+
+            My Wishlist
+
+        </h2>
+
+
+        <div
+            id="wishlistItems"
+        >
+        </div>
+
+
+    </div>
+
+
+</div>
+
+
+<!-- =========================================================
+     DEVELOPER SETTINGS MODAL
+========================================================= -->
+
+<div
+    id="developerModal"
+    class="modal-container developer-modal-container"
+>
+
+
+    <div class="modal developer-modal">
+
+
+        <button
+            class="modal-close"
+            onclick="closeModal('developerModal')"
+        >
+
+            ×
+
+        </button>
+
+
+        <div class="developer-header">
+
+
+            <div>
+
+
+                <span class="section-label">
+
+                    DEVELOPER MODE
+
+                </span>
+
+
+                <h2>
+
+                    TikTok Pixel Test Lab
+
+                </h2>
+
+
+                <p>
+
+                    Configure your Pixel and monitor
+                    ecommerce events sent by this website.
+
+                </p>
+
+
+            </div>
+
+
+            <div
+                id="developerPixelStatus"
+                class="developer-status"
+            >
+
+                Pixel Not Configured
+
+            </div>
+
+
+        </div>
+
+
+        <!-- =================================================
+             PIXEL CONFIGURATION
+        ================================================== -->
+
+
+        <section class="developer-section">
+
+
+            <div class="developer-section-title">
+
+
+                <h3>
+
+                    1. Pixel Configuration
+
+                </h3>
+
+
+                <span>
+
+                    Browser Pixel
+
+                </span>
+
+
+            </div>
+
+
+            <div class="developer-config-grid">
+
+
+                <div class="form-group">
+
+
+                    <label>
+
+                        TikTok Pixel ID
+
+                    </label>
+
+
+                    <input
+                        type="text"
+                        id="pixelIdInput"
+                        placeholder="Enter your TikTok Pixel ID"
+                    >
+
+
+                    <small>
+
+                        Example:
+                        CXXXXXXXXXXXXXXXXXXXXXXXX
+
+                    </small>
+
+
+                </div>
+
+
+                <div class="form-group">
+
+
+                    <label>
+
+                        Pixel Status
+
+                    </label>
+
+
+                    <select
+                        id="pixelEnabledInput"
+                    >
+
+
+                        <option value="true">
+
+                            Enabled
+
+                        </option>
+
+
+                        <option value="false">
+
+                            Disabled
+
+                        </option>
+
+
+                    </select>
+
+
+                </div>
+
+
+            </div>
+
+
+            <div class="developer-actions">
+
+
+                <button
+                    class="primary-button"
+                    onclick="savePixelConfiguration()"
+                >
+
+                    Save Pixel Configuration
+
+                </button>
+
+
+                <button
+                    class="secondary-button"
+                    onclick="loadSavedPixelConfiguration()"
+                >
+
+                    Load Saved Configuration
+
+                </button>
+
+
+                <button
+                    class="danger-button"
+                    onclick="removePixelConfiguration()"
+                >
+
+                    Remove Pixel
+
+                </button>
+
+
+            </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             PAGEVIEW
+        ================================================== -->
+
+
+        <section class="developer-section">
+
+
+            <div class="developer-section-title">
+
+
+                <h3>
+
+                    2. PageView
+
+                </h3>
+
+
+                <span>
+
+                    Base Event
+
+                </span>
+
+
+            </div>
+
+
+            <p>
+
+                Send a PageView event to TikTok.
+
+            </p>
+
+
+            <button
+                class="secondary-button"
+                onclick="sendPageViewEvent()"
+            >
+
+                Send PageView
+
+            </button>
+
+
+        </section>
+
+
+        <!-- =================================================
+             EVENT CONFIGURATION
+        ================================================== -->
+
+
+        <section class="developer-section">
+
+
+            <div class="developer-section-title">
+
+
+                <h3>
+
+                    3. Event Configuration
+
+                </h3>
+
+
+                <span>
+
+                    Select Parameters
+
+                </span>
+
+
+            </div>
+
+
+            <div
+                id="eventConfiguration"
+                class="event-configuration"
+            >
+            </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             CUSTOM EVENT
+        ================================================== -->
+
+
+        <section class="developer-section">
+
+
+            <div class="developer-section-title">
+
+
+                <h3>
+
+                    4. Custom Event Tester
+
+                </h3>
+
+
+                <span>
+
+                    Advanced
+
+                </span>
+
+
+            </div>
+
+
+            <div class="custom-event-grid">
+
+
+                <div class="form-group">
+
+
+                    <label>
+
+                        Event Name
+
+                    </label>
+
+
+                    <input
+                        type="text"
+                        id="customEventName"
+                        placeholder="Example: CustomTestEvent"
+                    >
+
+
+                </div>
+
+
+                <div class="form-group">
+
+
+                    <label>
+
+                        Event ID
+
+                    </label>
+
+
+                    <input
+                        type="text"
+                        id="customEventId"
+                        placeholder="Automatically generated"
+                    >
+
+
+                </div>
+
+
+            </div>
+
+
+            <div class="form-group">
+
+
+                <label>
+
+                    Event Parameters JSON
+
+                </label>
+
+
+                <textarea
+                    id="customEventParameters"
+                    rows="10"
+                    placeholder='{
+  "content_id": "SKU-001",
+  "content_type": "product",
+  "value": 99.99,
+  "currency": "USD"
+}'
+                ></textarea>
+
+
+            </div>
+
+
+            <button
+                class="primary-button"
+                onclick="sendCustomEvent()"
+            >
+
+                Send Custom Event
+
+            </button>
+
+
+        </section>
+
+
+        <!-- =================================================
+             TEST EVENTS
+        ================================================== -->
+
+
+        <section class="developer-section">
+
+
+            <div class="developer-section-title">
+
+
+                <h3>
+
+                    5. Quick Event Tester
+
+                </h3>
+
+
+                <span>
+
+                    Test Events
+
+                </span>
+
+
+            </div>
+
+
+            <div class="quick-event-grid">
+
+
+                <button
+                    onclick="testStandardEvent('ViewContent')"
+                >
+
+                    ViewContent
+
+                </button>
+
+
+                <button
+                    onclick="testStandardEvent('Search')"
+                >
+
+                    Search
+
+                </button>
+
+
+                <button
+                    onclick="testStandardEvent('AddToCart')"
+                >
+
+                    AddToCart
+
+                </button>
+
+
+                <button
+                    onclick="testStandardEvent('InitiateCheckout')"
+                >
+
+                    InitiateCheckout
+
+                </button>
+
+
+                <button
+                    onclick="testStandardEvent('AddPaymentInfo')"
+                >
+
+                    AddPaymentInfo
+
+                </button>
+
+
+                <button
+                    onclick="testStandardEvent('PlaceAnOrder')"
+                >
+
+                    PlaceAnOrder
+
+                </button>
+
+
+                <button
+                    onclick="testStandardEvent('CompletePayment')"
+                >
+
+                    CompletePayment
+
+                </button>
+
+
+                <button
+                    onclick="testStandardEvent('Purchase')"
+                >
+
+                    Purchase
+
+                </button>
+
+
+            </div>
+
+
+        </section>
+
+
+        <!-- =================================================
+             LIVE EVENT CONSOLE
+        ================================================== -->
+
+
+        <section class="developer-section">
+
+
+            <div class="developer-section-title">
+
+
+                <h3>
+
+                    6. Live Event Console
+
+                </h3>
+
+
+                <span id="eventCounter">
+
+                    0 Events
+
+                </span>
+
+
+            </div>
+
+
+            <div class="event-console-toolbar">
+
+
+                <button
+                    class="secondary-button"
+                    onclick="copyLatestEvent()"
+                >
+
+                    Copy Latest Event
+
+                </button>
+
+
+                <button
+                    class="danger-button"
+                    onclick="clearEventLogs()"
+                >
+
+                    Clear Logs
+
+                </button>
+
+
+            </div>
+
+
+            <div
+                id="eventConsole"
+                class="event-console"
+            >
+            </div>
+
+
+        </section>
+
+
+    </div>
+
+
+</div>
+
+
+<!-- =========================================================
+     EVENT DETAIL MODAL
+========================================================= -->
+
+<div
+    id="eventDetailModal"
+    class="modal-container"
+>
+
+
+    <div class="modal event-detail-modal">
+
+
+        <button
+            class="modal-close"
+            onclick="closeModal('eventDetailModal')"
+        >
+
+            ×
+
+        </button>
+
+
+        <h2>
+
+            Event Payload
+
+        </h2>
+
+
+        <p>
+
+            This is the event payload generated
+            by the ecommerce website.
+
+        </p>
+
+
+        <div class="event-detail-meta">
+
+
+            <div>
+
+                <strong>
+                    Event:
+                </strong>
+
+                <span id="detailEventName">
+                </span>
+
+            </div>
+
+
+            <div>
+
+                <strong>
+                    Event ID:
+                </strong>
+
+                <span id="detailEventId">
+                </span>
+
+            </div>
+
+
+            <div>
+
+                <strong>
+                    Currency:
+                </strong>
+
+                <span id="detailCurrency">
+                </span>
+
+            </div>
+
+
+        </div>
+
+
+        <pre
+            id="eventDetailPayload"
+            class="event-payload"
+        >
+        </pre>
+
+
+        <button
+            class="primary-button full-width"
+            onclick="copyEventDetail()"
+        >
+
+            Copy Event Payload
+
+        </button>
+
+
+    </div>
+
+
+</div>
+
+
+<!-- =========================================================
+     TOAST
+========================================================= -->
+
+<div
+    id="toast"
+    class="toast"
+>
+</div>
+
+
+<!-- =========================================================
+     JAVASCRIPT
+========================================================= -->
+
+<script>
+
+
+/* ============================================================
+   PRODUCT DATABASE
+============================================================ */
+
+
+const products = [
+
+    {
+        id: "SKU-001",
+        name: "Wireless Headphones",
+        category: "electronics",
+        price: 89.99,
+        image: "https://images.unsplash.com/photo-1505740420928-5e560c06d30e",
+        description: "Premium wireless headphones with active noise cancellation.",
+        stock: 25
+    },
+
+    {
+        id: "SKU-002",
+        name: "Smart Watch Pro",
+        category: "electronics",
+        price: 149.99,
+        image: "https://images.unsplash.com/photo-1523275335684-37898b6baf30",
+        description: "Track fitness, notifications and daily activity.",
+        stock: 15
+    },
+
+    {
+        id: "SKU-003",
+        name: "Classic Sneakers",
+        category: "fashion",
+        price: 79.99,
+        image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff",
+        description: "Comfortable everyday sneakers.",
+        stock: 40
+    },
+
+    {
+        id: "SKU-004",
+        name: "Minimal Backpack",
+        category: "fashion",
+        price: 59.99,
+        image: "https://images.unsplash.com/photo-1553062407-98eeb64c6a62",
+        description: "Modern minimalist backpack.",
+        stock: 20
+    },
+
+    {
+        id: "SKU-005",
+        name: "Modern Desk Lamp",
+        category: "home",
+        price: 44.99,
+        image: "https://images.unsplash.com/photo-1507473885765-e6ed057f782c",
+        description: "Elegant adjustable desk lamp.",
+        stock: 30
+    },
+
+    {
+        id: "SKU-006",
+        name: "Ceramic Coffee Set",
+        category: "home",
+        price: 34.99,
+        image: "https://images.unsplash.com/photo-1514228742587-6b1558fcca3d",
+        description: "Beautiful ceramic coffee set.",
+        stock: 50
+    },
+
+    {
+        id: "SKU-007",
+        name: "Skincare Essentials",
+        category: "beauty",
+        price: 69.99,
+        image: "https://images.unsplash.com/photo-1556228578-8c89e6adf883",
+        description: "Complete skincare essentials.",
+        stock: 35
+    },
+
+    {
+        id: "SKU-008",
+        name: "Fitness Yoga Mat",
+        category: "sports",
+        price: 29.99,
+        image: "https://images.unsplash.com/photo-1592432678016-e910b452f9a2",
+        description: "Premium non-slip yoga mat.",
+        stock: 60
+    }
+
+];
+
+
+/* ============================================================
+   CURRENCY
+============================================================ */
+
+
+const currencies = {
+
+    USD: {
+        symbol: "$",
+        flag: "🇺🇸",
+        rate: 1
+    },
+
+    PHP: {
+        symbol: "₱",
+        flag: "🇵🇭",
+        rate: 58
+    },
+
+    JPY: {
+        symbol: "¥",
+        flag: "🇯🇵",
+        rate: 158
+    },
+
+    EUR: {
+        symbol: "€",
+        flag: "🇪🇺",
+        rate: 0.86
+    },
+
+    GBP: {
+        symbol: "£",
+        flag: "🇬🇧",
+        rate: 0.74
+    },
+
+    SGD: {
+        symbol: "S$",
+        flag: "🇸🇬",
+        rate: 1.28
+    }
+
+};
+
+
+/* ============================================================
+   APPLICATION STATE
+============================================================ */
+
+
+let currentCurrency = "USD";
+
+let cart = [];
+
+let wishlist = [];
+
+let currentCategory = "all";
+
+let currentProducts = [...products];
+
+let discount = 0;
+
+
+/* ============================================================
+   PIXEL CONFIGURATION
+============================================================ */
+
+
+let pixelConfig = {
+
+    pixelId: "",
+
+    enabled: false,
+
+    events: {
+
+        ViewContent: true,
+
+        Search: true,
+
+        AddToCart: true,
+
+        InitiateCheckout: true,
+
+        AddPaymentInfo: true,
+
+        PlaceAnOrder: true,
+
+        CompletePayment: true,
+
+        Purchase: true
+
+    }
+
+};
+
+
+/* ============================================================
+   EVENT PARAMETERS
+============================================================ */
+
+
+const availableParameters = [
+
+    "content_id",
+
+    "content_name",
+
+    "content_type",
+
+    "quantity",
+
+    "value",
+
+    "currency",
+
+    "price",
+
+    "contents",
+
+    "query",
+
+    "order_id",
+
+    "event_id"
+
+];
+
+
+const eventParameters = {
+
+    ViewContent: [
+
+        "content_id",
+
+        "content_name",
+
+        "content_type",
+
+        "value",
+
+        "currency"
+
+    ],
+
+    Search: [
+
+        "query",
+
+        "content_type"
+
+    ],
+
+    AddToCart: [
+
+        "content_id",
+
+        "content_name",
+
+        "content_type",
+
+        "quantity",
+
+        "value",
+
+        "currency"
+
+    ],
+
+    InitiateCheckout: [
+
+        "contents",
+
+        "quantity",
+
+        "value",
+
+        "currency"
+
+    ],
+
+    AddPaymentInfo: [
+
+        "value",
+
+        "currency"
+
+    ],
+
+    PlaceAnOrder: [
+
+        "contents",
+
+        "quantity",
+
+        "value",
+
+        "currency",
+
+        "order_id"
+
+    ],
+
+    CompletePayment: [
+
+        "contents",
+
+        "quantity",
+
+        "value",
+
+        "currency"
+
+    ],
+
+    Purchase: [
+
+        "contents",
+
+        "quantity",
+
+        "value",
+
+        "currency",
+
+        "order_id"
+
+    ]
+
+};
+
+
+/* ============================================================
+   EVENT LOG
+============================================================ */
+
+
+let eventLogs = [];
+
+let selectedEvent = null;
+
+
+/* ============================================================
+   CURRENCY FUNCTIONS
+============================================================ */
+
+
+function convertPrice(
+    usdPrice
+) {
+
+    return usdPrice *
+        currencies[currentCurrency].rate;
+
+}
+
+
+function formatPrice(
+    usdPrice
+) {
+
+    const value =
+        convertPrice(
+            usdPrice
+        );
+
+    const decimals =
+        currentCurrency === "JPY"
+            ? 0
+            : 2;
+
+    return (
+
+        currencies[
+            currentCurrency
+        ].symbol +
+
+        value.toLocaleString(
+            undefined,
+            {
+                minimumFractionDigits:
+                    decimals,
+
+                maximumFractionDigits:
+                    decimals
+            }
+        )
+
+    );
+
+}
+
+
+function changeCurrency(
+    currency
+) {
+
+    currentCurrency =
+        currency;
+
+    document.getElementById(
+        "currencyCode"
+    ).textContent =
+        currency;
+
+    document.getElementById(
+        "currencyFlag"
+    ).textContent =
+        currencies[
+            currency
+        ].flag;
+
+    closeModal(
+        "currencyModal"
+    );
+
+    renderProducts();
+
+    updateCart();
+
+    showToast(
+        "Currency changed to " +
+        currency
+    );
+
+}
+
+
+/* ============================================================
+   PIXEL CONFIGURATION
+============================================================ */
+
+
+function savePixelConfiguration() {
+
+    const pixelId =
+        document.getElementById(
+            "pixelIdInput"
+        ).value.trim();
+
+    const enabled =
+        document.getElementById(
+            "pixelEnabledInput"
+        ).value === "true";
+
+
+    pixelConfig.pixelId =
+        pixelId;
+
+    pixelConfig.enabled =
+        enabled;
+
+
+    localStorage.setItem(
+        "tiktokPixelConfig",
+        JSON.stringify(
+            pixelConfig
+        )
+    );
+
+
+    initializeTikTokPixel();
+
+    updateDeveloperStatus();
+
+    showToast(
+        "Pixel configuration saved"
+    );
+
+}
+
+
+function loadSavedPixelConfiguration() {
+
+    const saved =
+        localStorage.getItem(
+            "tiktokPixelConfig"
+        );
+
+
+    if (!saved) {
+
+        showToast(
+            "No saved configuration found"
+        );
+
+        return;
+
+    }
+
+
+    try {
+
+        pixelConfig =
+            JSON.parse(
+                saved
+            );
+
+
+        document.getElementById(
+            "pixelIdInput"
+        ).value =
+            pixelConfig.pixelId ||
+            "";
+
+
+        document.getElementById(
+            "pixelEnabledInput"
+        ).value =
+            pixelConfig.enabled
+                ? "true"
+                : "false";
+
+
+        renderEventConfiguration();
+
+        initializeTikTokPixel();
+
+        updateDeveloperStatus();
+
+        showToast(
+            "Configuration loaded"
+        );
+
+    } catch (error) {
+
+        console.error(
+            error
+        );
+
+        showToast(
+            "Invalid saved configuration"
+        );
+
+    }
+
+}
+
+
+function removePixelConfiguration() {
+
+    localStorage.removeItem(
+        "tiktokPixelConfig"
+    );
+
+
+    pixelConfig = {
+
+        pixelId: "",
+
+        enabled: false,
+
+        events: {
+
+            ViewContent: true,
+
+            Search: true,
+
+            AddToCart: true,
+
+            InitiateCheckout: true,
+
+            AddPaymentInfo: true,
+
+            PlaceAnOrder: true,
+
+            CompletePayment: true,
+
+            Purchase: true
+
+        }
+
+    };
+
+
+    document.getElementById(
+        "pixelIdInput"
+    ).value = "";
+
+
+    document.getElementById(
+        "pixelEnabledInput"
+    ).value =
+        "false";
+
+
+    updateDeveloperStatus();
+
+    showToast(
+        "Pixel configuration removed"
+    );
+
+}
+
+
+/* ============================================================
+   INITIALIZE TIKTOK PIXEL
+============================================================ */
+
+
+function initializeTikTokPixel() {
+
+    if (
+        !pixelConfig.enabled
+    ) {
+
+        console.log(
+            "TikTok Pixel disabled"
+        );
+
+        return;
+
+    }
+
+
+    if (
+        !pixelConfig.pixelId
+    ) {
+
+        console.warn(
+            "TikTok Pixel ID is missing"
+        );
+
+        return;
+
+    }
+
+
+    if (
+        window.ttq &&
+        typeof window.ttq.load ===
+        "function"
+    ) {
+
+        window.ttq.load(
+            pixelConfig.pixelId
+        );
+
+        window.ttq.page();
+
+        logPixelEvent(
+            "PageView",
+            {
+                currency:
+                    currentCurrency
+            }
+        );
+
+        return;
+
+    }
+
+
+    /*
+    ============================================================
+    LOAD TIKTOK PIXEL SDK
+    ============================================================
+    */
+
+
+    !function (
+        w,
+        d,
+        t
+    ) {
+
+        w.TiktokAnalyticsObject =
+            t;
+
+        var ttq =
+            w[t] =
+            w[t] ||
+            [];
+
+
+        ttq.methods = [
+
+            "page",
+
+            "track",
+
+            "identify",
+
+            "instances",
+
+            "debug",
+
+            "on",
+
+            "off",
+
+            "once",
+
+            "ready",
+
+            "alias",
+
+            "group",
+
+            "enableCookie",
+
+            "disableCookie"
+
+        ];
+
+
+        ttq.setAndDefer =
+            function (
+                t,
+                e
+            ) {
+
+                t[e] =
+                    function () {
+
+                        t.push(
+
+                            [
+                                e
+                            ].concat(
+
+                                Array.prototype.slice.call(
+                                    arguments,
+                                    0
+                                )
+
+                            )
+
+                        );
+
+                    };
+
+            };
+
+
+        for (
+            var i = 0;
+            i < ttq.methods.length;
+            i++
+        ) {
+
+            ttq.setAndDefer(
+
+                ttq,
+
+                ttq.methods[i]
+
+            );
+
+        }
+
+
+        ttq.instance =
+            function (
+                t
+            ) {
+
+                var e =
+                    ttq._i[t] ||
+                    [];
+
+                for (
+                    var n = 0;
+                    n < ttq.methods.length;
+                    n++
+                ) {
+
+                    ttq.setAndDefer(
+
+                        e,
+
+                        ttq.methods[n]
+
+                    );
+
+                }
+
+                return e;
+
+            };
+
+
+        ttq.load =
+            function (
+                e,
+                n
+            ) {
+
+                var r =
+                    "https://analytics.tiktok.com/i18n/pixel/events.js";
+
+
+                ttq._i =
+                    ttq._i ||
+                    {};
+
+
+                ttq._i[e] =
+                    [];
+
+
+                ttq._i[e]._u =
+                    r;
+
+
+                ttq._t =
+                    ttq._t ||
+                    {};
+
+
+                ttq._t[e] =
+                    +new Date();
+
+
+                ttq._o =
+                    ttq._o ||
+                    {};
+
+
+                ttq._o[e] =
+                    n ||
+                    {};
+
+
+                var o =
+                    document.createElement(
+                        "script"
+                    );
+
+
+                o.type =
+                    "text/javascript";
+
+
+                o.async =
+                    true;
+
+
+                o.src =
+                    r +
+                    "?sdkid=" +
+                    e +
+                    "&lib=" +
+                    t;
+
+
+                var a =
+                    document.getElementsByTagName(
+                        "script"
+                    )[0];
+
+
+                a.parentNode.insertBefore(
+
+                    o,
+
+                    a
+
+                );
+
+            };
+
+
+        ttq.load(
+            pixelConfig.pixelId
+        );
+
+
+        ttq.page();
+
+
+    }(
+
+        window,
+
+        document,
+
+        "ttq"
+
+    );
+
+
+    logPixelEvent(
+        "PageView",
+        {
+            currency:
+                currentCurrency
+        }
+    );
+
+}
+
+
+/* ============================================================
+   SEND PAGEVIEW
+============================================================ */
+
+
+function sendPageViewEvent() {
+
+    if (
+        window.ttq &&
+        typeof window.ttq.page ===
+        "function"
+    ) {
+
+        window.ttq.page();
+
+    }
+
+
+    logPixelEvent(
+
+        "PageView",
+
+        {
+            event_id:
+                generateEventId(),
+
+            currency:
+                currentCurrency
+        }
+
+    );
+
+
+    showToast(
+        "PageView sent"
+    );
+
+}
+
+
+/* ============================================================
+   FIRE TIKTOK EVENT
+============================================================ */
+
+
+function fireTikTokEvent(
+
+    eventName,
+
+    eventData
+
+) {
+
+
+    if (
+        pixelConfig.events[
+            eventName
+        ] === false
+    ) {
+
+        console.warn(
+
+            "Event disabled:",
+
+            eventName
+
+        );
+
+        logPixelEvent(
+
+            eventName,
+
+            eventData,
+
+            "DISABLED"
+
+        );
+
+        return;
+
+    }
+
+
+    const eventId =
+        generateEventId();
+
+
+    const finalData = {
+
+        ...eventData,
+
+        event_id:
+            eventId
+
+    };
+
+
+    /*
+    ============================================================
+    SEND TO TIKTOK
+    ============================================================
+    */
+
+
+    if (
+
+        pixelConfig.enabled &&
+
+        window.ttq &&
+
+        typeof window.ttq.track ===
+        "function"
+
+    ) {
+
+
+        window.ttq.track(
+
+            eventName,
+
+            finalData
+
+        );
+
+
+    }
+
+
+    /*
+    ============================================================
+    LOG EVENT
+    ============================================================
+    */
+
+
+    logPixelEvent(
+
+        eventName,
+
+        finalData,
+
+        pixelConfig.enabled
+            ? "SENT"
+            : "LOCAL ONLY"
+
+    );
+
+
+    return finalData;
+
+}
+
+
+/* ============================================================
+   EVENT LOGGER
+============================================================ */
+
+
+function logPixelEvent(
+
+    eventName,
+
+    data,
+
+    status = "TEST"
+
+) {
+
+
+    const log = {
+
+        id:
+            generateEventId(),
+
+        event:
+            eventName,
+
+        status:
+            status,
+
+        timestamp:
+            new Date()
+            .toISOString(),
+
+        currency:
+            currentCurrency,
+
+        data:
+            data
+
+    };
+
+
+    eventLogs.unshift(
+        log
+    );
+
+
+    if (
+        eventLogs.length >
+        100
+    ) {
+
+        eventLogs =
+            eventLogs.slice(
+                0,
+                100
+            );
+
+    }
+
+
+    renderEventConsole();
+
+}
+
+
+/* ============================================================
+   EVENT ID
+============================================================ */
+
+
+function generateEventId() {
+
+    return (
+
+        "evt_" +
+
+        Date.now() +
+
+        "_" +
+
+        Math.random()
+            .toString(
+                36
+            )
+            .substring(
+                2,
+                10
+            )
+
+    );
+
+}
+
+
+/* ============================================================
+   RENDER EVENT CONFIGURATION
+============================================================ */
+
+
+function renderEventConfiguration() {
+
+    const container =
+        document.getElementById(
+            "eventConfiguration"
+        );
+
+
+    container.innerHTML = "";
+
+
+    Object.keys(
+        eventParameters
+    ).forEach(
+
+        eventName => {
+
+
+            const enabled =
+                pixelConfig.events[
+                    eventName
+                ] !== false;
+
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "event-config-card";
+
+
+            card.innerHTML = `
+
+                <div class="event-config-header">
+
+                    <div>
+
+                        <strong>
+                            ${eventName}
+                        </strong>
+
+                        <small>
+                            TikTok Event
+                        </small>
+
+                    </div>
+
+                    <label class="switch">
+
+                        <input
+                            type="checkbox"
+                            ${enabled ? "checked" : ""}
+                            onchange="
+                                toggleEvent(
+                                    '${eventName}',
+                                    this.checked
+                                )
+                            "
+                        >
+
+                        <span class="slider"></span>
+
+                    </label>
+
+                </div>
+
+
+                <div class="parameter-list">
+
+                    ${availableParameters.map(
+
+                        parameter => {
+
+                            const selected =
+                                eventParameters[
+                                    eventName
+                                ].includes(
+                                    parameter
+                                );
+
+                            return `
+
+                                <label>
+
+                                    <input
+                                        type="checkbox"
+                                        ${selected ? "checked" : ""}
+                                        onchange="
+                                            toggleParameter(
+                                                '${eventName}',
+                                                '${parameter}',
+                                                this.checked
+                                            )
+                                        "
+                                    >
+
+                                    ${parameter}
+
+                                </label>
+
+                            `;
+
+                        }
+
+                    ).join("")}
+
+                </div>
+
+
+                <button
+                    class="test-event-button"
+                    onclick="
+                        testStandardEvent(
+                            '${eventName}'
+                        )
+                    "
+                >
+
+                    Test ${eventName}
+
+                </button>
+
+            `;
+
+
+            container.appendChild(
+                card
+            );
+
+        }
+
+    );
+
+}
+
+
+/* ============================================================
+   TOGGLE EVENT
+============================================================ */
+
+
+function toggleEvent(
+
+    eventName,
+
+    enabled
+
+) {
+
+    pixelConfig.events[
+        eventName
+    ] =
+        enabled;
+
+
+    savePixelConfigurationSilent();
+
+}
+
+
+/* ============================================================
+   TOGGLE PARAMETER
+============================================================ */
+
+
+function toggleParameter(
+
+    eventName,
+
+    parameter,
+
+    enabled
+
+) {
+
+
+    if (
+        enabled
+    ) {
+
+
+        if (
+            !eventParameters[
+                eventName
+            ].includes(
+                parameter
+            )
+        ) {
+
+            eventParameters[
+                eventName
+            ].push(
+                parameter
+            );
+
+        }
+
+
+    } else {
+
+
+        eventParameters[
+            eventName
+        ] =
+
+            eventParameters[
+                eventName
+            ].filter(
+
+                item =>
+                    item !==
+                    parameter
+
+            );
+
+    }
+
+
+    savePixelConfigurationSilent();
+
+}
+
+
+/* ============================================================
+   SAVE WITHOUT TOAST
+============================================================ */
+
+
+function savePixelConfigurationSilent() {
+
+    localStorage.setItem(
+
+        "tiktokPixelConfig",
+
+        JSON.stringify(
+            pixelConfig
+        )
+
+    );
+
+}
+
+
+/* ============================================================
+   STANDARD EVENT TEST
+============================================================ */
+
+
+function testStandardEvent(
+
+    eventName
+
+) {
+
+
+    const product =
+        products[0];
+
+
+    const eventData = {
+
+
+        content_id:
+            product.id,
+
+
+        content_name:
+            product.name,
+
+
+        content_type:
+            "product",
+
+
+        quantity:
+            1,
+
+
+        price:
+            convertPrice(
+                product.price
+            ),
+
+
+        value:
+            convertPrice(
+                product.price
+            ),
+
+
+        currency:
+            currentCurrency,
+
+
+        contents: [
+
+            {
+
+                content_id:
+                    product.id,
+
+                content_name:
+                    product.name,
+
+                content_type:
+                    "product",
+
+                quantity:
+                    1,
+
+                price:
+                    convertPrice(
+                        product.price
+                    )
+
+            }
+
+        ],
+
+
+        query:
+            "test product",
+
+
+        order_id:
+            "TEST-" +
+            Date.now()
+
+
+    };
+
+
+    const selectedParameters =
+        eventParameters[
+            eventName
+        ] ||
+        availableParameters;
+
+
+    const filteredData = {};
+
+
+    selectedParameters.forEach(
+
+        parameter => {
+
+            if (
+                eventData[
+                    parameter
+                ] !==
+                undefined
+            ) {
+
+                filteredData[
+                    parameter
+                ] =
+                    eventData[
+                        parameter
+                    ];
+
+            }
+
+        }
+
+    );
+
+
+    fireTikTokEvent(
+
+        eventName,
+
+        filteredData
+
+    );
+
+
+    showToast(
+
+        eventName +
+        " test event sent"
+
+    );
+
+}
+
+
+/* ============================================================
+   CUSTOM EVENT
+============================================================ */
+
+
+function sendCustomEvent() {
+
+
+    const eventName =
+        document.getElementById(
+            "customEventName"
+        ).value.trim();
+
+
+    const eventId =
+        document.getElementById(
+            "customEventId"
+        ).value.trim() ||
+        generateEventId();
+
+
+    const raw =
+        document.getElementById(
+            "customEventParameters"
+        ).value.trim();
+
+
+    if (
+        !eventName
+    ) {
+
+        showToast(
+            "Enter an event name"
+        );
+
+        return;
+
+    }
+
+
+    let parameters = {};
+
+
+    if (
+        raw
+    ) {
+
+
+        try {
+
+            parameters =
+                JSON.parse(
+                    raw
+                );
+
+        } catch (
+            error
+        ) {
+
+            showToast(
+                "Invalid JSON parameters"
+            );
+
+            return;
+
+        }
+
+    }
+
+
+    parameters.event_id =
+        eventId;
+
+
+    fireTikTokEvent(
+
+        eventName,
+
+        parameters
+
+    );
+
+
+    showToast(
+
+        "Custom event sent"
+
+    );
+
+}
+
+
+/* ============================================================
+   EVENT CONSOLE
+============================================================ */
+
+
+function renderEventConsole() {
+
+
+    const consoleElement =
+        document.getElementById(
+            "eventConsole"
+        );
+
+
+    const counter =
+        document.getElementById(
+            "eventCounter"
+        );
+
+
+    counter.textContent =
+
+        eventLogs.length +
+
+        (
+            eventLogs.length ===
+            1
+
+                ? " Event"
+
+                : " Events"
+
+        );
+
+
+    if (
+        eventLogs.length ===
+        0
+    ) {
+
+
+        consoleElement.innerHTML = `
+
+            <div class="event-console-empty">
+
+                No events recorded yet.
+
+                <br>
+
+                Trigger an ecommerce action
+                or test an event.
+
+            </div>
+
+        `;
+
+
+        return;
+
+    }
+
+
+    consoleElement.innerHTML =
+
+        eventLogs.map(
+
+            (log, index) => `
+
+                <div
+                    class="event-log-row"
+                    onclick="
+                        openEventDetails(
+                            ${index}
+                        )
+                    "
+                >
+
+
+                    <div class="event-log-main">
+
+
+                        <strong>
+
+                            ${log.event}
+
+                        </strong>
+
+
+                        <span
+                            class="event-status ${log.status
+                                .toLowerCase()
+                                .replace(
+                                    " ",
+                                    "-"
+                                )}"
+                        >
+
+                            ${log.status}
+
+                        </span>
+
+
+                    </div>
+
+
+                    <div class="event-log-info">
+
+
+                        <span>
+
+                            ${log.currency}
+
+                        </span>
+
+
+                        <span>
+
+                            ${new Date(
+                                log.timestamp
+                            ).toLocaleTimeString()}
+
+                        </span>
+
+
+                    </div>
+
+
+                </div>
+
+            `
+
+        ).join("");
+
+}
+
+
+/* ============================================================
+   OPEN EVENT DETAILS
+============================================================ */
+
+
+function openEventDetails(
+
+    index
+
+) {
+
+
+    selectedEvent =
+        eventLogs[
+            index
+        ];
+
+
+    if (
+        !selectedEvent
+    ) {
+
+        return;
+
+    }
+
+
+    document.getElementById(
+        "detailEventName"
+    ).textContent =
+        selectedEvent.event;
+
+
+    document.getElementById(
+        "detailEventId"
+    ).textContent =
+        selectedEvent.id;
+
+
+    document.getElementById(
+        "detailCurrency"
+    ).textContent =
+        selectedEvent.currency;
+
+
+    document.getElementById(
+        "eventDetailPayload"
+    ).textContent =
+
+        JSON.stringify(
+
+            selectedEvent.data,
+
+            null,
+
+            4
+
+        );
+
+
+    document.getElementById(
+        "eventDetailModal"
+    ).classList.add(
+        "active"
+    );
+
+}
+
+
+/* ============================================================
+   COPY EVENT DETAIL
+============================================================ */
+
+
+function copyEventDetail() {
+
+
+    if (
+        !selectedEvent
+    ) {
+
+        return;
+
+    }
+
+
+    navigator.clipboard.writeText(
+
+        JSON.stringify(
+
+            selectedEvent,
+
+            null,
+
+            4
+
+        )
+
+    );
+
+
+    showToast(
+
+        "Event payload copied"
+
+    );
+
+}
+
+
+/* ============================================================
+   COPY LATEST EVENT
+============================================================ */
+
+
+function copyLatestEvent() {
+
+
+    if (
+        eventLogs.length ===
+        0
+    ) {
+
+        showToast(
+            "No events available"
+        );
+
+        return;
+
+    }
+
+
+    navigator.clipboard.writeText(
+
+        JSON.stringify(
+
+            eventLogs[0],
+
+            null,
+
+            4
+
+        )
+
+    );
+
+
+    showToast(
+
+        "Latest event copied"
+
+    );
+
+}
+
+
+/* ============================================================
+   CLEAR EVENT LOGS
+============================================================ */
+
+
+function clearEventLogs() {
+
+
+    eventLogs = [];
+
+
+    renderEventConsole();
+
+
+    showToast(
+
+        "Event logs cleared"
+
+    );
+
+}
+
+
+/* ============================================================
+   DEVELOPER PANEL
+============================================================ */
+
+
+function openDeveloperPanel() {
+
+
+    document.getElementById(
+        "developerModal"
+    ).classList.add(
+        "active"
+    );
+
+
+    loadSavedPixelConfiguration();
+
+
+    renderEventConfiguration();
+
+
+    updateDeveloperStatus();
+
+}
+
+
+function updateDeveloperStatus() {
+
+
+    const status =
+        document.getElementById(
+            "developerPixelStatus"
+        );
+
+
+    if (
+
+        pixelConfig.enabled &&
+
+        pixelConfig.pixelId
+
+    ) {
+
+
+        status.textContent =
+
+            "● Pixel Configured";
+
+
+        status.className =
+
+            "developer-status connected";
+
+
+    } else {
+
+
+        status.textContent =
+
+            "● Pixel Not Configured";
+
+
+        status.className =
+
+            "developer-status disconnected";
+
+    }
+
+}
+
+
+function openEventConsole() {
+
+
+    openDeveloperPanel();
+
+
+}
+
+
+/* ============================================================
+   PRODUCT RENDER
+============================================================ */
+
+
+function renderProducts() {
+
+
+    const grid =
+        document.getElementById(
+            "productGrid"
+        );
+
+
+    grid.innerHTML = "";
+
+
+    currentProducts.forEach(
+
+        product => {
+
+
+            const card =
+                document.createElement(
+                    "div"
+                );
+
+
+            card.className =
+                "product-card";
+
+
+            const liked =
+                wishlist.includes(
+                    product.id
+                );
+
+
+            card.innerHTML = `
+
+                <div class="product-image-container">
+
+
+                    <img
+
+                        src="${product.image}?auto=format&fit=crop&w=600&q=80"
+
+                        class="product-image"
+
+                        alt="${product.name}"
+
+                    >
+
+
+                    <button
+
+                        class="wishlist-button"
+
+                        onclick="
+                            event.stopPropagation();
+
+                            toggleWishlist(
+                                '${product.id}'
+                            );
+                        "
+
+                    >
+
+                        ${liked ? "♥" : "♡"}
+
+                    </button>
+
+
+                </div>
+
+
+                <div class="product-info">
+
+
+                    <span class="product-category">
+
+                        ${product.category}
+
+                    </span>
+
+
+                    <h3>
+
+                        ${product.name}
+
+                    </h3>
+
+
+                    <p>
+
+                        ${product.description}
+
+                    </p>
+
+
+                    <div class="product-bottom">
+
+
+                        <strong class="product-price">
+
+                            ${formatPrice(
+                                product.price
+                            )}
+
+                        </strong>
+
+
+                        <button
+
+                            class="add-button"
+
+                            onclick="
+                                event.stopPropagation();
+
+                                addToCart(
+                                    '${product.id}'
+                                );
+                            "
+
+                        >
+
+                            Add to Cart
+
+                        </button>
+
+
+                    </div>
+
+
+                </div>
+
+            `;
+
+
+            card.onclick =
+                function() {
+
+                    openProduct(
+                        product.id
+                    );
+
+                };
+
+
+            grid.appendChild(
+                card
+            );
+
+        }
+
+    );
+
+}
+
+
+/* ============================================================
+   PRODUCT DETAIL
+============================================================ */
+
+
+function openProduct(
+
+    productId
+
+) {
+
+
+    const product =
+        products.find(
+
+            item =>
+                item.id ===
+                productId
+
+        );
+
+
+    if (
+        !product
+    ) {
+
+        return;
+
+    }
+
+
+    document.getElementById(
+        "productModalContent"
+    ).innerHTML = `
+
+
+        <div class="product-detail">
+
+
+            <img
+
+                src="${product.image}?auto=format&fit=crop&w=800&q=80"
+
+                alt="${product.name}"
+
+            >
+
+
+            <div>
+
+
+                <span class="product-category">
+
+                    ${product.category}
+
+                </span>
+
+
+                <h2>
+
+                    ${product.name}
+
+                </h2>
+
+
+                <div class="detail-price">
+
+                    ${formatPrice(
+                        product.price
+                    )}
+
+                </div>
+
+
+                <p>
+
+                    ${product.description}
+
+                </p>
+
+
+                <p>
+
+                    <strong>
+                        Stock:
+                    </strong>
+
+                    ${product.stock}
+
+                </p>
+
+
+                <button
+
+                    class="primary-button full-width"
+
+                    onclick="
+
+                        addToCart(
+                            '${product.id}'
+                        );
+
+                        closeModal(
+                            'productModal'
+                        );
+
+                    "
+
+                >
+
+                    Add to Cart
+
+                </button>
+
+
+            </div>
+
+
+        </div>
+
+    `;
+
+
+    document.getElementById(
+        "productModal"
+    ).classList.add(
+        "active"
+    );
+
+
+    fireTikTokEvent(
+
+        "ViewContent",
+
+        {
+
+            content_id:
+                product.id,
+
+            content_name:
+                product.name,
+
+            content_type:
+                "product",
+
+            value:
+                convertPrice(
+                    product.price
+                ),
+
+            currency:
+                currentCurrency
+
+        }
+
+    );
+
+}
+
+
+/* ============================================================
+   ADD TO CART
+============================================================ */
+
+
+function addToCart(
+
+    productId
+
+) {
+
+
+    const product =
+        products.find(
+
+            item =>
+                item.id ===
+                productId
+
+        );
+
+
+    if (
+        !product
+    ) {
+
+        return;
+
+    }
+
+
+    const existing =
+        cart.find(
+
+            item =>
+                item.id ===
+                productId
+
+        );
+
+
+    if (
+        existing
+    ) {
+
+
+        existing.quantity++;
+
+
+    } else {
+
+
+        cart.push({
+
+            id:
+                productId,
+
+            quantity:
+                1
+
+        });
+
+
+    }
+
+
+    updateCart();
+
+
+    showToast(
+
+        product.name +
+        " added to cart"
+
+    );
+
+
+    fireTikTokEvent(
+
+        "AddToCart",
+
+        {
+
+            content_id:
+                product.id,
+
+            content_name:
+                product.name,
+
+            content_type:
+                "product",
+
+            quantity:
+                1,
+
+            value:
+                convertPrice(
+                    product.price
+                ),
+
+            currency:
+                currentCurrency
+
+        }
+
+    );
+
+}
+
+
+/* ============================================================
+   CART
+============================================================ */
+
+
+function updateCart() {
+
+
+    const container =
+        document.getElementById(
+            "cartItems"
+        );
+
+
+    const count =
+        cart.reduce(
+
+            (
+                total,
+
+                item
+
+            ) =>
+
+                total +
+                item.quantity,
+
+            0
+
+        );
+
+
+    document.getElementById(
+        "cartCount"
+    ).textContent =
+        count;
+
+
+    if (
+        cart.length ===
+        0
+    ) {
+
+
+        container.innerHTML = `
+
+            <div class="empty-cart">
+
+                🛒
+
+                <h3>
+
+                    Your cart is empty
+
+                </h3>
+
+            </div>
+
+        `;
+
+
+    } else {
+
+
+        container.innerHTML = "";
+
+
+        cart.forEach(
+
+            item => {
+
+
+                const product =
+                    products.find(
+
+                        p =>
+                            p.id ===
+                            item.id
+
+                    );
+
+
+                const div =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                div.className =
+                    "cart-item";
+
+
+                div.innerHTML = `
+
+
+                    <img
+
+                        src="${product.image}?auto=format&fit=crop&w=200&q=80"
+
+                    >
+
+
+                    <div class="cart-item-info">
+
+
+                        <h4>
+
+                            ${product.name}
+
+                        </h4>
+
+
+                        <strong>
+
+                            ${formatPrice(
+                                product.price
+                            )}
+
+                        </strong>
+
+
+                        <div class="quantity-control">
+
+
+                            <button
+
+                                onclick="
+                                    changeQuantity(
+                                        '${product.id}',
+                                        -1
+                                    )
+                                "
+
+                            >
+
+                                −
+
+                            </button>
+
+
+                            <span>
+
+                                ${item.quantity}
+
+                            </span>
+
+
+                            <button
+
+                                onclick="
+                                    changeQuantity(
+                                        '${product.id}',
+                                        1
+                                    )
+                                "
+
+                            >
+
+                                +
+
+                            </button>
+
+
+                        </div>
+
+
+                    </div>
+
+
+                    <button
+
+                        class="remove-button"
+
+                        onclick="
+                            removeFromCart(
+                                '${product.id}'
+                            )
+                        "
+
+                    >
+
+                        ×
+
+                    </button>
+
+
+                `;
+
+
+                container.appendChild(
+                    div
+                );
+
+            }
+
+        );
+
+    }
+
+
+    updateCartTotals();
+
+}
+
+
+/* ============================================================
+   CART TOTALS
+============================================================ */
+
+
+function calculateCart() {
+
+
+    let subtotal =
+        0;
+
+
+    cart.forEach(
+
+        item => {
+
+
+            const product =
+                products.find(
+
+                    p =>
+                        p.id ===
+                        item.id
+
+                );
+
+
+            subtotal +=
+
+                product.price *
+
+                item.quantity;
+
+
+        }
+
+    );
+
+
+    const discountAmount =
+
+        subtotal *
+
+        discount;
+
+
+    const afterDiscount =
+
+        subtotal -
+
+        discountAmount;
+
+
+    const shipping =
+
+        afterDiscount >= 100
+
+            ? 0
+
+            : 9.99;
+
+
+    return {
+
+
+        subtotal,
+
+        discount:
+            discountAmount,
+
+        shipping,
+
+        total:
+
+            afterDiscount +
+
+            shipping
+
+    };
+
+}
+
+
+function updateCartTotals() {
+
+
+    const totals =
+        calculateCart();
+
+
+    document.getElementById(
+        "cartSubtotal"
+    ).textContent =
+
+        formatPrice(
+            totals.subtotal
+        );
+
+
+    document.getElementById(
+        "cartDiscount"
+    ).textContent =
+
+        "-" +
+
+        formatPrice(
+            totals.discount
+        );
+
+
+    document.getElementById(
+        "cartShipping"
+    ).textContent =
+
+        totals.shipping === 0
+
+            ? "FREE"
+
+            : formatPrice(
+                totals.shipping
+            );
+
+
+    document.getElementById(
+        "cartTotal"
+    ).textContent =
+
+        formatPrice(
+            totals.total
+        );
+
+}
+
+
+/* ============================================================
+   CHECKOUT
+============================================================ */
+
+
+function startCheckout() {
+
+
+    if (
+        cart.length ===
+        0
+    ) {
+
+        showToast(
+            "Your cart is empty"
+        );
+
+        return;
+
+    }
+
+
+    const totals =
+        calculateCart();
+
+
+    fireTikTokEvent(
+
+        "InitiateCheckout",
+
+        {
+
+            contents:
+                getTikTokContents(),
+
+            quantity:
+                getCartQuantity(),
+
+            value:
+                convertPrice(
+                    totals.total
+                ),
+
+            currency:
+                currentCurrency
+
+        }
+
+    );
+
+
+    renderCheckout();
+
+
+    closeCart();
+
+
+    document.getElementById(
+        "checkoutModal"
+    ).classList.add(
+        "active"
+    );
+
+}
+
+
+/* ============================================================
+   CHECKOUT DATA
+============================================================ */
+
+
+function getTikTokContents() {
+
+
+    return cart.map(
+
+        item => {
+
+
+            const product =
+                products.find(
+
+                    p =>
+                        p.id ===
+                        item.id
+
+                );
+
+
+            return {
+
+
+                content_id:
+                    product.id,
+
+
+                content_name:
+                    product.name,
+
+
+                content_type:
+                    "product",
+
+
+                quantity:
+                    item.quantity,
+
+
+                price:
+                    convertPrice(
+                        product.price
+                    )
+
+
+            };
+
+        }
+
+    );
+
+}
+
+
+function getCartQuantity() {
+
+
+    return cart.reduce(
+
+        (
+            total,
+
+            item
+
+        ) =>
+
+            total +
+
+            item.quantity,
+
+        0
+
+    );
+
+}
+
+
+/* ============================================================
+   CHECKOUT RENDER
+============================================================ */
+
+
+function renderCheckout() {
+
+
+    const container =
+        document.getElementById(
+            "checkoutItems"
+        );
+
+
+    container.innerHTML = "";
+
+
+    cart.forEach(
+
+        item => {
+
+
+            const product =
+                products.find(
+
+                    p =>
+                        p.id ===
+                        item.id
+
+                );
+
+
+            container.innerHTML += `
+
+
+                <div class="checkout-item">
+
+
+                    <span>
+
+                        ${product.name}
+
+                        ×
+
+                        ${item.quantity}
+
+                    </span>
+
+
+                    <strong>
+
+                        ${formatPrice(
+
+                            product.price *
+
+                            item.quantity
+
+                        )}
+
+                    </strong>
+
+
+                </div>
+
+
+            `;
+
+        }
+
+    );
+
+
+    const totals =
+        calculateCart();
+
+
+    document.getElementById(
+        "checkoutSubtotal"
+    ).textContent =
+
+        formatPrice(
+            totals.subtotal
+        );
+
+
+    document.getElementById(
+        "checkoutDiscount"
+    ).textContent =
+
+        "-" +
+
+        formatPrice(
+            totals.discount
+        );
+
+
+    document.getElementById(
+        "checkoutShipping"
+    ).textContent =
+
+        totals.shipping === 0
+
+            ? "FREE"
+
+            : formatPrice(
+                totals.shipping
+            );
+
+
+    document.getElementById(
+        "checkoutTotal"
+    ).textContent =
+
+        formatPrice(
+            totals.total
+        );
+
+}
+
+
+/* ============================================================
+   SUBMIT ORDER
+============================================================ */
+
+
+function submitOrder(
+
+    event
+
+) {
+
+
+    event.preventDefault();
+
+
+    const totals =
+        calculateCart();
+
+
+    const payment =
+        document.querySelector(
+
+            'input[name="payment"]:checked'
+
+        ).value;
+
+
+    const orderId =
+
+        "ORD-" +
+
+        Date.now();
+
+
+    fireTikTokEvent(
+
+        "AddPaymentInfo",
+
+        {
+
+            value:
+                convertPrice(
+                    totals.total
+                ),
+
+            currency:
+                currentCurrency
+
+        }
+
+    );
+
+
+    fireTikTokEvent(
+
+        "PlaceAnOrder",
+
+        {
+
+            contents:
+                getTikTokContents(),
+
+            quantity:
+                getCartQuantity(),
+
+            value:
+                convertPrice(
+                    totals.total
+                ),
+
+            currency:
+                currentCurrency,
+
+            order_id:
+                orderId
+
+        }
+
+    );
+
+
+    fireTikTokEvent(
+
+        "CompletePayment",
+
+        {
+
+            contents:
+                getTikTokContents(),
+
+            quantity:
+                getCartQuantity(),
+
+            value:
+                convertPrice(
+                    totals.total
+                ),
+
+            currency:
+                currentCurrency
+
+        }
+
+    );
+
+
+    fireTikTokEvent(
+
+        "Purchase",
+
+        {
+
+            contents:
+                getTikTokContents(),
+
+            quantity:
+                getCartQuantity(),
+
+            value:
+                convertPrice(
+                    totals.total
+                ),
+
+            currency:
+                currentCurrency,
+
+            order_id:
+                orderId
+
+        }
+
+    );
+
+
+    showToast(
+
+        "Purchase event sent"
+
+    );
+
+
+    cart = [];
+
+
+    discount = 0;
+
+
+    updateCart();
+
+
+    closeModal(
+        "checkoutModal"
+    );
+
+}
+
+
+/* ============================================================
+   SEARCH
+============================================================ */
+
+
+function searchProducts() {
+
+
+    const query =
+
+        document.getElementById(
+            "searchInput"
+        ).value
+        .toLowerCase()
+        .trim();
+
+
+    currentProducts =
+
+        products.filter(
+
+            product => {
+
+
+                const matches =
+
+                    product.name
+                    .toLowerCase()
+                    .includes(
+                        query
+                    );
+
+
+                const category =
+
+                    currentCategory ===
+                    "all"
+
+                        ||
+
+                    product.category ===
+                    currentCategory;
+
+
+                return (
+
+                    matches &&
+
+                    category
+
+                );
+
+            }
+
+        );
+
+
+    renderProducts();
+
+
+    if (
+        query
+    ) {
+
+
+        fireTikTokEvent(
+
+            "Search",
+
+            {
+
+                query:
+                    query,
+
+                content_type:
+                    "product"
+
+            }
+
+        );
+
+    }
+
+}
+
+
+/* ============================================================
+   CATEGORY
+============================================================ */
+
+
+function filterCategory(
+
+    category,
+
+    button
+
+) {
+
+
+    currentCategory =
+        category;
+
+
+    if (
+        button
+    ) {
+
+
+        document
+            .querySelectorAll(
+                ".filter-button"
+            )
+            .forEach(
+
+                item =>
+
+                    item.classList.remove(
+                        "active"
+                    )
+
+            );
+
+
+        button.classList.add(
+            "active"
+        );
+
+    }
+
+
+    currentProducts =
+
+        category ===
+        "all"
+
+            ? [...products]
+
+            : products.filter(
+
+                product =>
+
+                    product.category ===
+                    category
+
+            );
+
+
+    renderProducts();
+
+}
+
+
+/* ============================================================
+   SORT
+============================================================ */
+
+
+function sortProducts() {
+
+
+    const value =
+
+        document.getElementById(
+            "sortSelect"
+        ).value;
+
+
+    if (
+        value ===
+        "price-low"
+    ) {
+
+
+        currentProducts.sort(
+
+            (
+                a,
+
+                b
+
+            ) =>
+
+                a.price -
+                b.price
+
+        );
+
+    }
+
+
+    if (
+        value ===
+        "price-high"
+    ) {
+
+
+        currentProducts.sort(
+
+            (
+                a,
+
+                b
+
+            ) =>
+
+                b.price -
+                a.price
+
+        );
+
+    }
+
+
+    if (
+        value ===
+        "name"
+    ) {
+
+
+        currentProducts.sort(
+
+            (
+                a,
+
+                b
+
+            ) =>
+
+                a.name.localeCompare(
+                    b.name
+                )
+
+        );
+
+    }
+
+
+    renderProducts();
+
+}
+
+
+/* ============================================================
+   WISHLIST
+============================================================ */
+
+
+function toggleWishlist(
+
+    productId
+
+) {
+
+
+    if (
+
+        wishlist.includes(
+            productId
+        )
+
+    ) {
+
+
+        wishlist =
+
+            wishlist.filter(
+
+                id =>
+
+                    id !==
+                    productId
+
+            );
+
+
+    } else {
+
+
+        wishlist.push(
+            productId
+        );
+
+    }
+
+
+    document.getElementById(
+        "wishlistCount"
+    ).textContent =
+
+        wishlist.length;
+
+
+    renderProducts();
+
+}
+
+
+function openWishlist() {
+
+
+    const container =
+
+        document.getElementById(
+            "wishlistItems"
+        );
+
+
+    container.innerHTML = "";
+
+
+    wishlist.forEach(
+
+        id => {
+
+
+            const product =
+
+                products.find(
+
+                    p =>
+
+                        p.id ===
+                        id
+
+                );
+
+
+            container.innerHTML += `
+
+
+                <div class="wishlist-item">
+
+
+                    <img
+
+                        src="${product.image}"
+
+                    >
+
+
+                    <div>
+
+
+                        <h4>
+
+                            ${product.name}
+
+                        </h4>
+
+
+                        <strong>
+
+                            ${formatPrice(
+                                product.price
+                            )}
+
+                        </strong>
+
+
+                    </div>
+
+
+                </div>
+
+
+            `;
+
+        }
+
+    );
+
+
+    if (
+        wishlist.length ===
+        0
+    ) {
+
+
+        container.innerHTML = `
+
+            <div class="empty-cart">
+
+                ♡
+
+                <h3>
+
+                    Wishlist is empty
+
+                </h3>
+
+            </div>
+
+        `;
+
+    }
+
+
+    document.getElementById(
+        "wishlistModal"
+    ).classList.add(
+        "active"
+    );
+
+}
+
+
+/* ============================================================
+   CART FUNCTIONS
+============================================================ */
+
+
+function changeQuantity(
+
+    productId,
+
+    amount
+
+) {
+
+
+    const item =
+
+        cart.find(
+
+            item =>
+
+                item.id ===
+                productId
+
+        );
+
+
+    if (
+        !item
+    ) {
+
+        return;
+
+    }
+
+
+    item.quantity +=
+        amount;
+
+
+    if (
+        item.quantity <=
+        0
+    ) {
+
+
+        removeFromCart(
+            productId
+        );
+
+
+        return;
+
+    }
+
+
+    updateCart();
+
+}
+
+
+function removeFromCart(
+
+    productId
+
+) {
+
+
+    cart =
+
+        cart.filter(
+
+            item =>
+
+                item.id !==
+                productId
+
+        );
+
+
+    updateCart();
+
+}
+
+
+function applyCoupon() {
+
+
+    const coupon =
+
+        document.getElementById(
+            "couponInput"
+        ).value
+        .trim()
+        .toUpperCase();
+
+
+    if (
+        coupon ===
+        "SAVE10"
+    ) {
+
+
+        discount =
+            0.10;
+
+
+        showToast(
+            "10% discount applied"
+        );
+
+
+    } else if (
+        coupon ===
+        "SAVE20"
+    ) {
+
+
+        discount =
+            0.20;
+
+
+        showToast(
+            "20% discount applied"
+        );
+
+
+    } else {
+
+
+        showToast(
+            "Invalid coupon"
+        );
+
+    }
+
+
+    updateCart();
+
+}
+
+
+/* ============================================================
+   MODALS
+============================================================ */
+
+
+function openCart() {
+
+
+    document.getElementById(
+        "cartDrawer"
+    ).classList.add(
+        "active"
+    );
+
+
+    document.getElementById(
+        "cartOverlay"
+    ).classList.add(
+        "active"
+    );
+
+}
+
+
+function closeCart() {
+
+
+    document.getElementById(
+        "cartDrawer"
+    ).classList.remove(
+        "active"
+    );
+
+
+    document.getElementById(
+        "cartOverlay"
+    ).classList.remove(
+        "active"
+    );
+
+}
+
+
+function openCurrencyModal() {
+
+
+    document.getElementById(
+        "currencyModal"
+    ).classList.add(
+        "active"
+    );
+
+}
+
+
+function openAccount() {
+
+
+    document.getElementById(
+        "accountModal"
+    ).classList.add(
+        "active"
+    );
+
+}
+
+
+function loginUser() {
+
+
+    showToast(
+        "Demo login successful"
+    );
+
+
+    closeModal(
+        "accountModal"
+    );
+
+}
+
+
+function closeModal(
+
+    id
+
+) {
+
+
+    document.getElementById(
+        id
+    ).classList.remove(
+        "active"
+    );
+
+}
+
+
+/* ============================================================
+   UI
+============================================================ */
+
+
+function showToast(
+
+    message
+
+) {
+
+
+    const toast =
+
+        document.getElementById(
+            "toast"
+        );
+
+
+    toast.textContent =
+        message;
+
+
+    toast.classList.add(
+        "active"
+    );
+
+
+    setTimeout(
+
+        () => {
+
+            toast.classList.remove(
+                "active"
+            );
+
+        },
+
+        2500
+
+    );
+
+}
+
+
+function scrollToProducts() {
+
+
+    document.getElementById(
+        "productsSection"
+    ).scrollIntoView({
+
+        behavior:
+            "smooth"
+
+    });
+
+}
+
+
+function goHome() {
+
+
+    window.scrollTo({
+
+        top:
+            0,
+
+        behavior:
+            "smooth"
+
+    });
+
+}
+
+
+/* ============================================================
+   PAYMENT UI
+============================================================ */
+
+
+document
+    .querySelectorAll(
+
+        'input[name="payment"]'
+
+    )
+    .forEach(
+
+        input => {
+
+
+            input.addEventListener(
+
+                "change",
+
+                function() {
+
+
+                    document.getElementById(
+                        "cardFields"
+                    ).style.display =
+
+                        this.value ===
+                        "credit_card"
+
+                            ? "block"
+
+                            : "none";
+
+                }
+
+            );
+
+        }
+
+    );
+
+
+/* ============================================================
+   INITIALIZE
+============================================================ */
+
+
+renderProducts();
+
+
+updateCart();
+
+
+loadSavedPixelConfiguration();
+
+
+renderEventConfiguration();
+
+
+renderEventConsole();
+
+
+updateDeveloperStatus();
+
+
+</script>
+
+
+<!-- =========================================================
+     EXTRA DEVELOPER UI STYLES
+     CSS FILE REMAINS EXTERNAL.
+     These styles are only for the newly added developer UI.
+========================================================= -->
+
+<style>
+
+
+.developer-button {
+
+    border:
+        1px solid #6366f1;
+
+    background:
+        #eef2ff;
+
+    color:
+        #4f46e5;
+
+    padding:
+        9px 12px;
+
+    border-radius:
+        7px;
+
+    font-size:
+        12px;
+
+    font-weight:
+        600;
+
+}
+
+
+.developer-modal-container {
+
+    align-items:
+        flex-start;
+
+    padding:
+        30px;
+
+}
+
+
+.developer-modal {
+
+    width:
+        min(
+            1100px,
+            100%
+        );
+
+    max-height:
+        92vh;
+
+}
+
+
+.developer-header {
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    gap:
+        30px;
+
+    padding-bottom:
+        25px;
+
+    border-bottom:
+        1px solid #e5e7eb;
+
+}
+
+
+.developer-header h2 {
+
+    font-size:
+        30px;
+
+    margin:
+        8px 0;
+
+}
+
+
+.developer-header p {
+
+    color:
+        #6b7280;
+
+}
+
+
+.developer-status {
+
+    height:
+        fit-content;
+
+    padding:
+        10px 15px;
+
+    border-radius:
+        30px;
+
+    font-size:
+        12px;
+
+    font-weight:
+        700;
+
+    white-space:
+        nowrap;
+
+}
+
+
+.developer-status.connected {
+
+    background:
+        #dcfce7;
+
+    color:
+        #166534;
+
+}
+
+
+.developer-status.disconnected {
+
+    background:
+        #fee2e2;
+
+    color:
+        #991b1b;
+
+}
+
+
+.developer-section {
+
+    margin-top:
+        25px;
+
+    padding:
+        25px;
+
+    border:
+        1px solid #e5e7eb;
+
+    border-radius:
+        12px;
+
+    background:
+        #ffffff;
+
+}
+
+
+.developer-section-title {
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        center;
+
+    margin-bottom:
+        15px;
+
+}
+
+
+.developer-section-title h3 {
+
+    font-size:
+        17px;
+
+}
+
+
+.developer-section-title span {
+
+    font-size:
+        11px;
+
+    color:
+        #6366f1;
+
+    background:
+        #eef2ff;
+
+    padding:
+        5px 9px;
+
+    border-radius:
+        5px;
+
+}
+
+
+.developer-config-grid {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        2fr 1fr;
+
+    gap:
+        20px;
+
+}
+
+
+.developer-section small {
+
+    color:
+        #6b7280;
+
+    font-size:
+        11px;
+
+}
+
+
+.developer-actions {
+
+    display:
+        flex;
+
+    gap:
+        10px;
+
+    flex-wrap:
+        wrap;
+
+}
+
+
+.secondary-button {
+
+    border:
+        1px solid #d1d5db;
+
+    background:
+        #ffffff;
+
+    color:
+        #111827;
+
+    padding:
+        11px 16px;
+
+    border-radius:
+        7px;
+
+    font-weight:
+        600;
+
+}
+
+
+.danger-button {
+
+    border:
+        none;
+
+    background:
+        #fee2e2;
+
+    color:
+        #991b1b;
+
+    padding:
+        11px 16px;
+
+    border-radius:
+        7px;
+
+    font-weight:
+        600;
+
+}
+
+
+.event-configuration {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(
+            2,
+            1fr
+        );
+
+    gap:
+        15px;
+
+}
+
+
+.event-config-card {
+
+    border:
+        1px solid #e5e7eb;
+
+    border-radius:
+        10px;
+
+    padding:
+        18px;
+
+}
+
+
+.event-config-header {
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        center;
+
+    margin-bottom:
+        15px;
+
+}
+
+
+.event-config-header strong {
+
+    display:
+        block;
+
+    font-size:
+        15px;
+
+}
+
+
+.event-config-header small {
+
+    color:
+        #6b7280;
+
+}
+
+
+.parameter-list {
+
+    display:
+        flex;
+
+    flex-wrap:
+        wrap;
+
+    gap:
+        7px;
+
+    margin-bottom:
+        15px;
+
+}
+
+
+.parameter-list label {
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        4px;
+
+    padding:
+        5px 8px;
+
+    border:
+        1px solid #e5e7eb;
+
+    border-radius:
+        5px;
+
+    font-size:
+        10px;
+
+}
+
+
+.test-event-button {
+
+    width:
+        100%;
+
+    padding:
+        9px;
+
+    border:
+        none;
+
+    background:
+        #111827;
+
+    color:
+        white;
+
+    border-radius:
+        6px;
+
+    font-size:
+        12px;
+
+}
+
+
+.custom-event-grid {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        1fr 1fr;
+
+    gap:
+        20px;
+
+}
+
+
+.developer-section textarea {
+
+    width:
+        100%;
+
+    border:
+        1px solid #d1d5db;
+
+    border-radius:
+        8px;
+
+    padding:
+        15px;
+
+    font-family:
+        monospace;
+
+    font-size:
+        12px;
+
+    resize:
+        vertical;
+
+}
+
+
+.quick-event-grid {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(
+            4,
+            1fr
+        );
+
+    gap:
+        10px;
+
+}
+
+
+.quick-event-grid button {
+
+    padding:
+        12px;
+
+    border:
+        1px solid #e5e7eb;
+
+    background:
+        #f8fafc;
+
+    border-radius:
+        7px;
+
+    font-weight:
+        600;
+
+    font-size:
+        12px;
+
+}
+
+
+.quick-event-grid button:hover {
+
+    background:
+        #eef2ff;
+
+    border-color:
+        #6366f1;
+
+}
+
+
+.event-console-toolbar {
+
+    display:
+        flex;
+
+    gap:
+        10px;
+
+    margin-bottom:
+        15px;
+
+}
+
+
+.event-console {
+
+    background:
+        #111827;
+
+    color:
+        white;
+
+    border-radius:
+        10px;
+
+    padding:
+        10px;
+
+    max-height:
+        400px;
+
+    overflow-y:
+        auto;
+
+}
+
+
+.event-console-empty {
+
+    padding:
+        50px;
+
+    text-align:
+        center;
+
+    color:
+        #9ca3af;
+
+}
+
+
+.event-log-row {
+
+    padding:
+        14px;
+
+    border-bottom:
+        1px solid #374151;
+
+    cursor:
+        pointer;
+
+}
+
+
+.event-log-row:hover {
+
+    background:
+        #1f2937;
+
+}
+
+
+.event-log-main {
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    align-items:
+        center;
+
+}
+
+
+.event-log-info {
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    margin-top:
+        6px;
+
+    color:
+        #9ca3af;
+
+    font-size:
+        10px;
+
+}
+
+
+.event-status {
+
+    padding:
+        3px 7px;
+
+    border-radius:
+        4px;
+
+    font-size:
+        9px;
+
+}
+
+
+.event-status.sent {
+
+    background:
+        #166534;
+
+}
+
+
+.event-status.local-only {
+
+    background:
+        #92400e;
+
+}
+
+
+.event-status.disabled {
+
+    background:
+        #991b1b;
+
+}
+
+
+.event-status.test {
+
+    background:
+        #3730a3;
+
+}
+
+
+.event-detail-modal {
+
+    width:
+        min(
+            750px,
+            100%
+        );
+
+}
+
+
+.event-detail-meta {
+
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(
+            3,
+            1fr
+        );
+
+    gap:
+        10px;
+
+    margin:
+        20px 0;
+
+}
+
+
+.event-detail-meta div {
+
+    background:
+        #f8fafc;
+
+    padding:
+        12px;
+
+    border-radius:
+        7px;
+
+    font-size:
+        12px;
+
+}
+
+
+.event-payload {
+
+    background:
+        #111827;
+
+    color:
+        #d1d5db;
+
+    padding:
+        20px;
+
+    border-radius:
+        8px;
+
+    max-height:
+        400px;
+
+    overflow:
+        auto;
+
+    font-size:
+        12px;
+
+    margin-bottom:
+        20px;
+
+}
+
+
+.switch {
+
+    position:
+        relative;
+
+    display:
+        inline-block;
+
+    width:
+        42px;
+
+    height:
+        23px;
+
+}
+
+
+.switch input {
+
+    opacity:
+        0;
+
+    width:
+        0;
+
+    height:
+        0;
+
+}
+
+
+.slider {
+
+    position:
+        absolute;
+
+    cursor:
+        pointer;
+
+    inset:
+        0;
+
+    background:
+        #d1d5db;
+
+    border-radius:
+        30px;
+
+    transition:
+        .3s;
+
+}
+
+
+.slider:before {
+
+    position:
+        absolute;
+
+    content:
+        "";
+
+    height:
+        17px;
+
+    width:
+        17px;
+
+    left:
+        3px;
+
+    bottom:
+        3px;
+
+    background:
+        white;
+
+    border-radius:
+        50%;
+
+    transition:
+        .3s;
+
+}
+
+
+.switch input:checked + .slider {
+
+    background:
+        #6366f1;
+
+}
+
+
+.switch input:checked + .slider:before {
+
+    transform:
+        translateX(
+            19px
+        );
+
+}
+
+
+@media (
+    max-width: 800px
+) {
+
+
+    .developer-config-grid,
+
+    .custom-event-grid,
+
+    .event-configuration {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+
+    .quick-event-grid {
+
+        grid-template-columns:
+            repeat(
+                2,
+                1fr
+            );
+
+    }
+
+
+    .developer-header {
+
+        flex-direction:
+            column;
+
+    }
+
+
+    .event-detail-meta {
+
+        grid-template-columns:
+            1fr;
+
+    }
+
+}
+
+
+</style>
+
+
+</body>
+
+</html>
