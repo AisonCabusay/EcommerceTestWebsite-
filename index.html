@@ -11,7 +11,7 @@
     >
 
     <title>
-       V1 ShopSphere | TikTok Pixel Test Store
+       V2 ShopSphere | TikTok Pixel Test Store
     </title>
 
 
@@ -2464,34 +2464,33 @@ let discount = 0;
 ============================================================ */
 
 
-let pixelConfig = {
+let DEFAULT_PIXEL_CONFIG = {
 
     pixelId: "",
-
     enabled: false,
 
+    // These control whether the developer can test the event.
+    // They do NOT automatically fire the events.
     events: {
-
         ViewContent: true,
-
         Search: true,
-
         AddToCart: true,
-
         InitiateCheckout: true,
-
         AddPaymentInfo: true,
-
         PlaceAnOrder: true,
-
         CompletePayment: true,
-
-        Purchase: true
-
+        Purchase: true,
+        CompleteRegistration: true
     }
 
 };
+let pixelConfig = JSON.parse(
+    JSON.stringify(DEFAULT_PIXEL_CONFIG)
+);
 
+let tikTokPixelReady = false;
+let tikTokPixelLoading = false;
+let tikTokPixelInitializedId = null;
 
 /* ============================================================
    EVENT PARAMETERS
@@ -2898,31 +2897,87 @@ function removePixelConfiguration() {
 
 function initializeTikTokPixel() {
 
+    /*
+    ============================================================
+    RESET STATE
+    ============================================================
+    */
+
+    tikTokPixelReady = false;
+
+
+    /*
+    ============================================================
+    PIXEL DISABLED
+    ============================================================
+    */
+
     if (
         !pixelConfig.enabled
     ) {
 
         console.log(
-            "TikTok Pixel disabled"
+            "[TikTok Pixel] Pixel disabled"
         );
 
-        return;
+        updateDeveloperStatus();
+
+        return false;
 
     }
 
+
+    /*
+    ============================================================
+    PIXEL ID REQUIRED
+    ============================================================
+    */
 
     if (
         !pixelConfig.pixelId
     ) {
 
-        console.warn(
-            "TikTok Pixel ID is missing"
+        console.error(
+            "[TikTok Pixel] Pixel ID is missing"
         );
 
-        return;
+        updateDeveloperStatus();
+
+        return false;
 
     }
 
+
+    /*
+    ============================================================
+    SAME PIXEL ALREADY INITIALIZED
+    ============================================================
+    */
+
+    if (
+        tikTokPixelInitializedId ===
+        pixelConfig.pixelId
+    ) {
+
+        console.log(
+            "[TikTok Pixel] Already initialized:",
+            pixelConfig.pixelId
+        );
+
+        tikTokPixelReady = true;
+
+        updateDeveloperStatus();
+
+        return true;
+
+    }
+
+
+    /*
+    ============================================================
+    EXISTING TIKTOK SDK
+    ============================================================
+    */
 
     if (
         window.ttq &&
@@ -2930,23 +2985,282 @@ function initializeTikTokPixel() {
         "function"
     ) {
 
-        window.ttq.load(
+        try {
+
+            window.ttq.load(
+                pixelConfig.pixelId
+            );
+
+            tikTokPixelInitializedId =
+                pixelConfig.pixelId;
+
+            tikTokPixelReady = true;
+
+            console.log(
+                "[TikTok Pixel] Initialized:",
+                pixelConfig.pixelId
+            );
+
+            updateDeveloperStatus();
+
+            return true;
+
+        } catch (error) {
+
+            console.error(
+                "[TikTok Pixel] Initialization failed:",
+                error
+            );
+
+            return false;
+
+        }
+
+    }
+
+
+    /*
+    ============================================================
+    CREATE TIKTOK PIXEL SDK
+    ============================================================
+    */
+
+    if (
+        tikTokPixelLoading
+    ) {
+
+        console.log(
+            "[TikTok Pixel] SDK is already loading"
+        );
+
+        return false;
+
+    }
+
+
+    tikTokPixelLoading = true;
+
+
+    !function(
+        w,
+        d,
+        t
+    ) {
+
+        w.TiktokAnalyticsObject =
+            t;
+
+        var ttq =
+            w[t] =
+            w[t] ||
+            [];
+
+
+        ttq.methods = [
+
+            "page",
+            "track",
+            "identify",
+            "instances",
+            "debug",
+            "on",
+            "off",
+            "once",
+            "ready",
+            "alias",
+            "group",
+            "enableCookie",
+            "disableCookie"
+
+        ];
+
+
+        ttq.setAndDefer =
+            function(
+                t,
+                e
+            ) {
+
+                t[e] =
+                    function() {
+
+                        t.push(
+
+                            [
+                                e
+                            ].concat(
+
+                                Array.prototype.slice.call(
+                                    arguments,
+                                    0
+                                )
+
+                            )
+
+                        );
+
+                    };
+
+            };
+
+
+        for (
+            var i = 0;
+            i < ttq.methods.length;
+            i++
+        ) {
+
+            ttq.setAndDefer(
+                ttq,
+                ttq.methods[i]
+            );
+
+        }
+
+
+        ttq.instance =
+            function(
+                t
+            ) {
+
+                var e =
+                    ttq._i[t] ||
+                    [];
+
+                for (
+                    var n = 0;
+                    n < ttq.methods.length;
+                    n++
+                ) {
+
+                    ttq.setAndDefer(
+                        e,
+                        ttq.methods[n]
+                    );
+
+                }
+
+                return e;
+
+            };
+
+
+        ttq.load =
+            function(
+                e,
+                n
+            ) {
+
+                var r =
+                    "https://analytics.tiktok.com/i18n/pixel/events.js";
+
+
+                ttq._i =
+                    ttq._i ||
+                    {};
+
+
+                ttq._i[e] =
+                    [];
+
+
+                ttq._i[e]._u =
+                    r;
+
+
+                ttq._t =
+                    ttq._t ||
+                    {};
+
+
+                ttq._t[e] =
+                    +new Date();
+
+
+                ttq._o =
+                    ttq._o ||
+                    {};
+
+
+                ttq._o[e] =
+                    n ||
+                    {};
+
+
+                var o =
+                    d.createElement(
+                        "script"
+                    );
+
+
+                o.type =
+                    "text/javascript";
+
+
+                o.async =
+                    true;
+
+
+                o.src =
+                    r +
+                    "?sdkid=" +
+                    e +
+                    "&lib=" +
+                    t;
+
+
+                var a =
+                    d.getElementsByTagName(
+                        "script"
+                    )[0];
+
+
+                a.parentNode.insertBefore(
+                    o,
+                    a
+                );
+
+            };
+
+
+        ttq.load(
             pixelConfig.pixelId
         );
 
-        window.ttq.page();
 
-        logPixelEvent(
-            "PageView",
-            {
-                currency:
-                    currentCurrency
-            }
-        );
+    }(
+        window,
+        document,
+        "ttq"
+    );
 
-        return;
 
-    }
+    tikTokPixelInitializedId =
+        pixelConfig.pixelId;
+
+
+    /*
+    ============================================================
+    SDK QUEUE IS READY
+    ============================================================
+    */
+
+    tikTokPixelReady = true;
+
+    tikTokPixelLoading = false;
+
+
+    console.log(
+        "[TikTok Pixel] SDK initialized and ready"
+    );
+
+
+    updateDeveloperStatus();
+
+
+    return true;
+
+}
 
 
     /*
@@ -3197,34 +3511,98 @@ function initializeTikTokPixel() {
 function sendPageViewEvent() {
 
     if (
-        window.ttq &&
-        typeof window.ttq.page ===
-        "function"
+        !pixelConfig.enabled
     ) {
 
-        window.ttq.page();
+        showToast(
+            "Enable the Pixel first"
+        );
+
+        return false;
 
     }
 
 
-    logPixelEvent(
+    if (
+        !window.ttq ||
+        typeof window.ttq.page !==
+        "function"
+    ) {
 
-        "PageView",
+        showToast(
+            "TikTok Pixel is not ready"
+        );
 
-        {
-            event_id:
-                generateEventId(),
+        console.error(
+            "[TikTok Pixel] ttq.page is not available"
+        );
 
-            currency:
-                currentCurrency
-        }
+        return false;
 
-    );
+    }
 
 
-    showToast(
-        "PageView sent"
-    );
+    try {
+
+        window.ttq.page();
+
+
+        const eventId =
+            generateEventId();
+
+
+        logPixelEvent(
+
+            "PageView",
+
+            {
+                event_id:
+                    eventId,
+
+                currency:
+                    currentCurrency
+            },
+
+            "SENT"
+
+        );
+
+
+        showToast(
+            "PageView sent to TikTok"
+        );
+
+
+        console.log(
+            "[TikTok Pixel] PageView sent"
+        );
+
+
+        return true;
+
+
+    } catch (error) {
+
+        console.error(
+            "[TikTok Pixel] PageView failed:",
+            error
+        );
+
+
+        logPixelEvent(
+
+            "PageView",
+
+            {},
+
+            "ERROR"
+
+        );
+
+
+        return false;
+
+    }
 
 }
 
@@ -3234,47 +3612,177 @@ function sendPageViewEvent() {
 ============================================================ */
 
 
-function fireTikTokEvent(
+function fireTikTokEvent(eventName, eventData = {}) {
 
-    eventName,
+    console.log(
+        "[TikTok Pixel] Preparing event:",
+        eventName,
+        eventData
+    );
 
-    eventData
-
-) {
-
+    /*
+    ============================================================
+    CHECK EVENT CONFIGURATION
+    ============================================================
+    */
 
     if (
-        pixelConfig.events[
-            eventName
-        ] === false
+        pixelConfig.events[eventName] === false
     ) {
 
         console.warn(
-
-            "Event disabled:",
-
+            "[TikTok Pixel] Event is disabled:",
             eventName
-
         );
 
         logPixelEvent(
-
             eventName,
-
             eventData,
-
             "DISABLED"
-
         );
 
-        return;
+        showToast(
+            eventName +
+            " is disabled"
+        );
+
+        return false;
 
     }
 
 
+    /*
+    ============================================================
+    CHECK PIXEL ENABLED
+    ============================================================
+    */
+
+    if (
+        !pixelConfig.enabled
+    ) {
+
+        console.error(
+            "[TikTok Pixel] Pixel is disabled"
+        );
+
+        logPixelEvent(
+            eventName,
+            eventData,
+            "PIXEL DISABLED"
+        );
+
+        showToast(
+            "Enable the TikTok Pixel first"
+        );
+
+        return false;
+
+    }
+
+
+    /*
+    ============================================================
+    CHECK PIXEL ID
+    ============================================================
+    */
+
+    if (
+        !pixelConfig.pixelId
+    ) {
+
+        console.error(
+            "[TikTok Pixel] Pixel ID is missing"
+        );
+
+        logPixelEvent(
+            eventName,
+            eventData,
+            "PIXEL ID MISSING"
+        );
+
+        showToast(
+            "Enter a TikTok Pixel ID first"
+        );
+
+        return false;
+
+    }
+
+
+    /*
+    ============================================================
+    CHECK TIKTOK SDK
+    ============================================================
+    */
+
+    if (
+        !window.ttq
+    ) {
+
+        console.error(
+            "[TikTok Pixel] window.ttq is not available"
+        );
+
+        logPixelEvent(
+            eventName,
+            eventData,
+            "SDK NOT LOADED"
+        );
+
+        showToast(
+            "TikTok Pixel SDK is not loaded"
+        );
+
+        return false;
+
+    }
+
+
+    /*
+    ============================================================
+    CHECK TRACK FUNCTION
+    ============================================================
+    */
+
+    if (
+        typeof window.ttq.track !==
+        "function"
+    ) {
+
+        console.error(
+            "[TikTok Pixel] ttq.track is not ready"
+        );
+
+        logPixelEvent(
+            eventName,
+            eventData,
+            "SDK NOT READY"
+        );
+
+        showToast(
+            "TikTok Pixel is still loading"
+        );
+
+        return false;
+
+    }
+
+
+    /*
+    ============================================================
+    GENERATE EVENT ID
+    ============================================================
+    */
+
     const eventId =
         generateEventId();
 
+
+    /*
+    ============================================================
+    CORRECT EVENT PAYLOAD
+    ============================================================
+    */
 
     const finalData = {
 
@@ -3286,58 +3794,79 @@ function fireTikTokEvent(
     };
 
 
+    console.log(
+        "[TikTok Pixel] Sending:",
+        eventName,
+        finalData
+    );
+
+
     /*
     ============================================================
     SEND TO TIKTOK
     ============================================================
     */
 
-
-    if (
-
-        pixelConfig.enabled &&
-
-        window.ttq &&
-
-        typeof window.ttq.track ===
-        "function"
-
-    ) {
-
+    try {
 
         window.ttq.track(
-
             eventName,
-
             finalData
-
         );
 
 
+        /*
+        ========================================================
+        LOG AS SENT
+        ========================================================
+        */
+
+        logPixelEvent(
+            eventName,
+            finalData,
+            "SENT"
+        );
+
+
+        showToast(
+            eventName +
+            " sent to TikTok"
+        );
+
+
+        console.log(
+            "[TikTok Pixel] Event queued successfully:",
+            eventName
+        );
+
+
+        return true;
+
+
+    } catch (error) {
+
+        console.error(
+            "[TikTok Pixel] Failed to send event:",
+            error
+        );
+
+
+        logPixelEvent(
+            eventName,
+            finalData,
+            "ERROR"
+        );
+
+
+        showToast(
+            "Failed to send " +
+            eventName
+        );
+
+
+        return false;
+
     }
-
-
-    /*
-    ============================================================
-    LOG EVENT
-    ============================================================
-    */
-
-
-    logPixelEvent(
-
-        eventName,
-
-        finalData,
-
-        pixelConfig.enabled
-            ? "SENT"
-            : "LOCAL ONLY"
-
-    );
-
-
-    return finalData;
 
 }
 
@@ -3692,50 +4221,75 @@ function savePixelConfigurationSilent() {
 
 
 function testStandardEvent(
-
     eventName
-
 ) {
 
+    console.log(
+        "[TikTok Pixel] Testing event:",
+        eventName
+    );
+
+
+    /*
+    ============================================================
+    CHECK EVENT EXISTS
+    ============================================================
+    */
+
+    if (
+        !eventParameters[eventName]
+    ) {
+
+        console.warn(
+            "Unknown event:",
+            eventName
+        );
+
+    }
+
+
+    /*
+    ============================================================
+    SAMPLE PRODUCT
+    ============================================================
+    */
 
     const product =
         products[0];
 
 
-    const eventData = {
+    /*
+    ============================================================
+    TEST DATA
+    ============================================================
+    */
 
+    const eventData = {
 
         content_id:
             product.id,
 
-
         content_name:
             product.name,
-
 
         content_type:
             "product",
 
-
         quantity:
             1,
-
 
         price:
             convertPrice(
                 product.price
             ),
 
-
         value:
             convertPrice(
                 product.price
             ),
 
-
         currency:
             currentCurrency,
-
 
         contents: [
 
@@ -3762,25 +4316,32 @@ function testStandardEvent(
 
         ],
 
-
         query:
             "test product",
-
 
         order_id:
             "TEST-" +
             Date.now()
 
-
     };
 
 
+    /*
+    ============================================================
+    GET SELECTED PARAMETERS
+    ============================================================
+    */
+
     const selectedParameters =
-        eventParameters[
-            eventName
-        ] ||
+        eventParameters[eventName] ||
         availableParameters;
 
+
+    /*
+    ============================================================
+    FILTER PARAMETERS
+    ============================================================
+    */
 
     const filteredData = {};
 
@@ -3790,18 +4351,12 @@ function testStandardEvent(
         parameter => {
 
             if (
-                eventData[
-                    parameter
-                ] !==
+                eventData[parameter] !==
                 undefined
             ) {
 
-                filteredData[
-                    parameter
-                ] =
-                    eventData[
-                        parameter
-                    ];
+                filteredData[parameter] =
+                    eventData[parameter];
 
             }
 
@@ -3810,50 +4365,60 @@ function testStandardEvent(
     );
 
 
-    fireTikTokEvent(
+    /*
+    ============================================================
+    SEND ONLY THIS EVENT
+    ============================================================
+    */
 
-        eventName,
+    const sent =
+        fireTikTokEvent(
 
-        filteredData
+            eventName,
 
-    );
+            filteredData
+
+        );
 
 
-    showToast(
+    if (
+        sent
+    ) {
 
-        eventName +
-        " test event sent"
+        console.log(
+            "[TikTok Pixel] Test successful:",
+            eventName
+        );
 
-    );
+    }
+
+
+    return sent;
 
 }
-
 
 /* ============================================================
    CUSTOM EVENT
 ============================================================ */
 
-
 function sendCustomEvent() {
 
-
     const eventName =
-        document.getElementById(
-            "customEventName"
-        ).value.trim();
-
-
-    const eventId =
-        document.getElementById(
-            "customEventId"
-        ).value.trim() ||
-        generateEventId();
+        document
+            .getElementById(
+                "customEventName"
+            )
+            .value
+            .trim();
 
 
     const raw =
-        document.getElementById(
-            "customEventParameters"
-        ).value.trim();
+        document
+            .getElementById(
+                "customEventParameters"
+            )
+            .value
+            .trim();
 
 
     if (
@@ -3864,7 +4429,7 @@ function sendCustomEvent() {
             "Enter an event name"
         );
 
-        return;
+        return false;
 
     }
 
@@ -3875,7 +4440,6 @@ function sendCustomEvent() {
     if (
         raw
     ) {
-
 
         try {
 
@@ -3888,33 +4452,26 @@ function sendCustomEvent() {
             error
         ) {
 
+            console.error(
+                error
+            );
+
             showToast(
                 "Invalid JSON parameters"
             );
 
-            return;
+            return false;
 
         }
 
     }
 
 
-    parameters.event_id =
-        eventId;
-
-
-    fireTikTokEvent(
+    return fireTikTokEvent(
 
         eventName,
 
         parameters
-
-    );
-
-
-    showToast(
-
-        "Custom event sent"
 
     );
 
