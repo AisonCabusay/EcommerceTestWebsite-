@@ -4324,16 +4324,11 @@ function openEventConsole() {
 function renderProducts() {
 
 
-    const grid =
-        document.getElementById(
-            "productGrid"
-        );
-
+       const grid = document.getElementById("productGrid");
 
     grid.innerHTML = "";
 
-
-    currentProducts.forEach(
+    currentProducts.forEach(product => {(
 
         product => {
 
@@ -5599,62 +5594,31 @@ function searchProducts() {
 ============================================================ */
 
 
-function filterCategory(
+function filterCategory(category, button) {
 
-    category,
+    currentCategory = category;
 
-    button
-
-) {
-
-
-    currentCategory =
-        category;
-
-
-    if (
-        button
-    ) {
-
+    if (button) {
 
         document
-            .querySelectorAll(
-                ".filter-button"
-            )
-            .forEach(
+            .querySelectorAll(".filter-button")
+            .forEach(item => {
 
-                item =>
+                item.classList.remove("active");
 
-                    item.classList.remove(
-                        "active"
-                    )
+            });
 
-            );
-
-
-        button.classList.add(
-            "active"
-        );
+        button.classList.add("active");
 
     }
 
-
     currentProducts =
-
-        category ===
-        "all"
-
-            ? [...products]
-
+        category === "all"
+            ? products
             : products.filter(
-
                 product =>
-
-                    product.category ===
-                    category
-
+                    product.category === category
             );
-
 
     renderProducts();
 
